@@ -1,10 +1,5 @@
 package es.uc3m.tiw.controladores;
 
-<<<<<<< HEAD
-public class ControladorUsuario {
-
-}
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,5 +45,4 @@ public class ControladorUsuario {
 			
 		}
 		
-	}
->>>>>>> branch 'master' of https://github.com/norsan03/Gateway.git
+}
