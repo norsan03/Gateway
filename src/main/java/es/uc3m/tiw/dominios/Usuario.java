@@ -2,14 +2,14 @@ package es.uc3m.tiw.dominios;
 
 import java.io.Serializable;
 
-public class Cliente implements Serializable{
+public class Usuario implements Serializable{
 	
-	public Cliente() {
+	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Cliente(long id, String nombre, String apellidos, String ciudad, String password, String email) {
+	public Usuario(long id, String nombre, String apellidos, String ciudad, String password, String email) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

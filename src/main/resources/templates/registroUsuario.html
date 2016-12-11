@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +33,8 @@
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+	<script src="http://blackpeppersoftware.github.io/thymeleaf-fragment.js/thymeleaf-fragment.js" defer="defer" th:if="false"></script>
+	
     <![endif]-->
   <style type="text/css">
   
@@ -87,46 +89,46 @@
         <div class="col-md-4">
           <div class="container well well-lg" style="background-color: white">
 
-            <form class="form-signin" action="usuario" method="post">
-              <h2 class="form-signin-heading text-center"><b>Regístrate</b></h2>
-              <h3 class="text-center">Es gratis y lo será siempre!</h3>
+            <form th:action="@{/registrar}" th:object="${usuario}"class="form-signin" method="post">
+              <h2 class="form-signin-heading text-center"><b>Reg&iacute;strate</b></h2>
+              <h3 class="text-center">Es gratis y lo ser&aacute; siempre!</h3>
               </br>
 
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="inputNombre" class="sr-only">Nombre</label>
-                    <input data-validation="required" data-validation="length" data-validation-length="max15" type="text" id="inputNombre" class="form-control" placeholder="Nombre" name="nombre" required>
+                    <input th:field="*{nombre}" data-validation="required" data-validation-length="max15" data-validation-error-msg="Introduzca nombre" type="text" id="inputNombre" class="form-control" placeholder="Nombre" name="nombre" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                  <label for="inputApellidos" class="sr-only">Apellidos</label>
-                 <input data-validation="required" data-validation="length" data-validation-length="max20" type="text" id="inputApellidos" class="form-control" placeholder="Apellidos" name="apellidos" required>
+                 <input th:field="*{apellidos}" data-validation="required"  data-validation-length="max15" data-validation-error-msg="Introduzca apellidos"data-validation-length="max20" type="text" id="inputApellidos" class="form-control" placeholder="Apellidos" name="apellidos" required>
                 </div>
               </div>
 
               <div class="form-group">
               <label for="inputEmail" class="sr-only">Email</label>
-              <input data-validation="email" type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" required autofocus>
+              <input th:field="*{email}" data-validation="email" data-validation-length="max15" data-validation-error-msg="Introduzca un correo vÃ¡lido" type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" required autofocus>
               </div>
 
               <div class="form-group">
-              <label for="inputPassword" class="sr-only">Contraseña</label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" name="clave" required>
+              <label for="inputPassword" class="sr-only">Contrase&ntilde;a</label>
+              <input th:field="*{password}" data-validation="required" type="password" id="inputPassword" class="form-control" placeholder="Contraseï¿½a" name="clave" required>
               </div>
 
               <div class="form-group">
-              <label for="inputPassword2" class="sr-only">Repetir Contraseña</label>
-              <input type="password" id="inputPassword2" class="form-control" placeholder="Repetir Contraseña" name="clave2" required>
+              <label for="inputPassword2" class="sr-only">Repetir Contrase&ntilde;a</label>
+              <input type="password" data-validation="confirmation" id="inputPassword2" class="form-control" placeholder="Repetir Contraseï¿½a" name="clave2" required>
               </div>
 
               <div class="form-group">
               <label for="inputCiudad" class="sr-only">Ciudad</label>
-              <input data-validation="required" data-validation="length" data-validation-length="max10" type="text" id="inputCiudad" class="form-control" placeholder="Ciudad" name="ciudad" required>
+              <input th:field="*{ciudad}" data-validation="required" data-validation="length" data-validation-length="max10" type="text" id="inputCiudad" class="form-control" placeholder="Ciudad" name="ciudad" required>
               </div>
               <div class="checkbox" style="text-align: auto !important">
                 <label>
-                    <input type="checkbox" value="condiciones"> Acepto las <a href="#">Condiciones</a> y la <a href="#">Política de datos</a>, incluido el <a href="#">uso de cookies</a>
+                    <input type="checkbox" value="condiciones"> Acepto las <a href="#">Condiciones</a> y la <a href="#">Polï¿½tica de datos</a>, incluido el <a href="#">uso de cookies</a>
                 </label>
               </div>
               
