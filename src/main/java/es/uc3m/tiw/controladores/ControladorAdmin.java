@@ -14,7 +14,7 @@ import es.uc3m.tiw.dominios.Admin;
 public class ControladorAdmin {
 
 	@Autowired
-	private RestTemplate restTemplate;
+	RestTemplate restTemplate;
 	
 
 	@RequestMapping(value = "/ADMlogin", method = RequestMethod.POST)
