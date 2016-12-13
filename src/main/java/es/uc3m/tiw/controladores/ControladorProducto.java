@@ -20,16 +20,19 @@ public class ControladorProducto {
 	RestTemplate restTemplate;
 	
 
+
 	
 	@RequestMapping(value="/altaProducto", method=RequestMethod.GET)
-	public String crearProducto(Model modelo){
+	public String darAltaProducto(Model modelo, @ModelAttribute Producto producto){
+		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
+		modelo.addAttribute(pregistrado);*/
 		return "altaProducto";
 	}
 	
-	@RequestMapping(value="/altaProducto", method=RequestMethod.POST)
-	public String guardarProducto(Model modelo, @ModelAttribute Producto producto){
-		Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
-		modelo.addAttribute(pregistrado);
+	@RequestMapping(value="/misProductos", method=RequestMethod.GET)
+	public String verProductosUsuario(Model modelo, @ModelAttribute Producto producto){
+		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
+		modelo.addAttribute(pregistrado);*/
 		return "misProductos";
 	}
 
