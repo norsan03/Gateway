@@ -4,7 +4,7 @@
 
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <title>Wallapop - Registro</title>
+    <title>Wallapop - Registro Producto</title>
 
         <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
 		<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
@@ -28,7 +28,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/" style="padding: 7px;"><img th:src="@{https://lh3.googleusercontent.com/eiHGogXLz3iBRZhKrdr7FOkw6q5P_iuGSwqGWmd1yRzMcc-B7V6xIKR9wzuqDrD61K4=w300" alt="Wallapop" height="38" width="38" /></a> 
+          <a class="navbar-brand" style="padding: 7px;"><img th:src="@{https://lh3.googleusercontent.com/eiHGogXLz3iBRZhKrdr7FOkw6q5P_iuGSwqGWmd1yRzMcc-B7V6xIKR9wzuqDrD61K4=w300}" alt="Wallapop" height="38" width="38" /></a> 
         <a class="navbar-brand" href="/">Wallapop TIW</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -56,7 +56,7 @@
         
         
         
-        <form th:action="@{/registrar}" th:object="${producto}"class="form-signin" method="post"> 
+        <form th:action="@{/altaProducto}" th:object="${producto}" class="form-signin" method="post"> 
           
           <div class="form-group">
           <label for="titulo" class="sr-only">T&iacute;tulo del Producto</label>
@@ -70,23 +70,20 @@
 
           <div class="form-group">
           <label for="descripcion" class="sr-only">Descripcion</label>
-          <input type="text" th:field="*{descripcion}" name="descripcion" id="descripcion" class="form-control" placeholder="Descripci&oacute;n" >
+          <input type="text" th:field="*{descripcion}" name="descripcion" id="descripcion" class="form-control" placeholder="Descripci&oacute;n" />
           </div>
           
           <div class="form-group">
-          <div class="row">
+          <label for="ciudad" class="sr-only">Ciudad</label>
+          <input type="text" th:field="*{ciudad}" name="ciudad" id="ciudad" class="form-control" placeholder="Ciudad" />
+          </div>
           
-          <div class=col-md-8>
+          <div class="form-group">
            <label for="cantidad" class="sr-only">Precio</label>
-           <input type="number" th:field="*{precio}" name="precio" id="precio" class="form-control" placeholder="Precio">
+           <input type="number" th:field="*{precio}" name="precio" id="precio" class="form-control" placeholder="Precio" />
   		  </div>
-  		  
-  		  <div class=col-md-4>
-                <span class="input-group-addon">EUR</span>
-          </div>
           
-          </div>
-          </div>
+         
           <div id="anadirProducto">
              <button type="submit" class="btn btn-lg btn-success btn-block">A&ntilde;adir Producto</button>
           </div>

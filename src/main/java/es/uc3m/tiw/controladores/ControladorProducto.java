@@ -23,7 +23,13 @@ public class ControladorProducto {
 
 	
 	@RequestMapping(value="/altaProducto", method=RequestMethod.GET)
-	public String darAltaProducto(Model modelo, @ModelAttribute Producto producto){
+	public String darAltaProductoGET(Model modelo, @ModelAttribute Producto producto){
+	
+		return "altaProducto";
+	}
+	
+	@RequestMapping(value="/altaProducto", method=RequestMethod.POST)
+	public String darAltaProductoPOST(Model modelo, @ModelAttribute Producto producto){
 		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
 		modelo.addAttribute(pregistrado);*/
 		return "altaProducto";
@@ -34,6 +40,33 @@ public class ControladorProducto {
 		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
 		modelo.addAttribute(pregistrado);*/
 		return "misProductos";
+	}
+	
+	@RequestMapping(value="/producto", method=RequestMethod.GET)
+	public String verProductoEspecifico(Model modelo, @ModelAttribute Producto producto){
+		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
+		modelo.addAttribute(pregistrado);*/
+		return "producto";
+	}
+	
+	@RequestMapping(value="/borrarProducto", method=RequestMethod.GET)
+	public String borrarProducto(Model modelo, @ModelAttribute Producto producto){
+		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
+		modelo.addAttribute(pregistrado);*/
+		return "misProductos";
+	}
+	
+	@RequestMapping(value="/ModificarProducto", method=RequestMethod.GET)
+	public String modificarProductoGET(Model modelo, @ModelAttribute Producto producto){
+
+		return "ModificarProducto";
+	}
+	
+	@RequestMapping(value="/ModificarProducto", method=RequestMethod.POST)
+	public String modificarProductoPOST(Model modelo, @ModelAttribute Producto producto){
+		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
+		modelo.addAttribute(pregistrado);*/
+		return "ModificarProducto";
 	}
 
 	
