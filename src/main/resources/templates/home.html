@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>Wallapop - Home</title>
+
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
+		<script th:href="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
+		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
+
+  </head>
+
+  <body>
+
+
+
+
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" style="padding: 7px;"><img th:src="@{https://lh3.googleusercontent.com/eiHGogXLz3iBRZhKrdr7FOkw6q5P_iuGSwqGWmd1yRzMcc-B7V6xIKR9wzuqDrD61K4=w300}" th:alt="Wallapop" th:height="38" th:width="38" /></a> 
+        <a class="navbar-brand" th:href="@{/home}">Wallapop TIW</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li class="active"><a th:href="@{/home}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+              <li><a th:href="@{/misProductos}"><span class="glyphicon glyphicon-list-alt"></span> Mis productos</a></li>
+              <li><a th:href="@{/Perfil}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+            </ul>
+           <ul class="nav navbar-nav navbar-right">
+              <li><span class="glyphicon glyphicon-log-out"></span> Logout</li>
+            </ul> 
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+
+    <nav class="navbar">
+
+      <ol class="breadcrumb" style="background-color: #23C5B2; color: white">
+        <li><a th:href="@{/}" style="color: white"><b>Home</b></a></li>
+      </ol>
+
+    </nav>
+
+
+    <div class="container text-center" style="padding: 15px">
+      <div class="row">
+
+        <div class="col-md-3 well">
+        
+          <div class="well"  style="background-color: white">
+          <h4>Búsqueda Simple</h4>
+            <form class="form-group input-group" role="search" action="busqueda" method="post">
+              <input type="text" class="form-control" placeholder="Buscar.." name="busqueda"/>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+            </form>
+          </div>
+          <div class="well"  style="background-color: white">
+          <h4>B&uacute;squeda Avanzada</h4>
+            <div class="form-group input-group">
+              <input type="text" class="form-control" placeholder="Buscar.."/>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-9 well" style="background-color: white">
+        <h2>Bienvenido</h2>
+        
+
+
+
+
+		
+        <tr th:each="producto:${productos}" th:class="col-md-4 well">
+      
+				
+	         <!--   <img src="${usuario.apellidos }" alt="Generic product" width="240" height="180">  -->
+	          <h2><td th:text="${producto.titulo}">Titulo</td></h2>
+	          <p><a class="btn btn-info"  role="button">Ver Detalles &raquo;</a></p>
+
+	      
+			
+	     </tr> 
+
+	
+      	</div>
+    
+    </div>
+    
+    </div>
+
+
+
+
+      <footer style="background-color: #555;
+      color: white;
+      padding: 15px;">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+
+
+
+
+  </body>
+  
+</html>
