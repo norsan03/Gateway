@@ -54,42 +54,44 @@
       
 		  <h2 class="form-signin-heading text-center"><b>Da de alta un producto</b></h2>
           <h3 class="text-center">Ver&aacute;s que f&aacute;cil es vender!</h3>
-        <form th:action="@{/registrar}" th:object="${producto}"class="form-signin" method="post">
-    
-          
-         
+        
+        
+        
+        <form th:action="@{/registrar}" th:object="${producto}"class="form-signin" method="post"> 
           
           <div class="form-group">
           <label for="titulo" class="sr-only">T&iacute;tulo del Producto</label>
-          <input type="text" th:field="*{titulo}" th:name="titulo" th:id="titulo" class="form-control" placeholder="T&iacute;tulo del Producto" />
+          <input type="text" th:field="*{titulo}" name="titulo" th:id="titulo" class="form-control" placeholder="T&iacute;tulo del Producto" />
           </div>
   
           <div class="form-group">
           <label for="categoria" class="sr-only">Categoria</label>
-          <input type="text" th:field="*{categoria}" th:name="categoria" th:id="categoria" class="form-control" placeholder="Categoria" />
+          <input type="text" th:field="*{categoria}" name="categoria" id="categoria" class="form-control" placeholder="Categoria" />
           </div>
 
           <div class="form-group">
           <label for="descripcion" class="sr-only">Descripcion</label>
-          <input type="text" th:field="*{descripcion}" th:name="descripcion" th:id="descripcion" class="form-control" placeholder="Descripci&oacute;n" maxlength="500" required>
+          <input type="text" th:field="*{descripcion}" name="descripcion" id="descripcion" class="form-control" placeholder="Descripci&oacute;n" >
           </div>
           
           <div class="form-group">
           <div class="row">
-          <div class=col-md-8>
           
+          <div class=col-md-8>
            <label for="cantidad" class="sr-only">Precio</label>
-           <input type="number" th:field="*{precio}" th:name="precio" th:id="precio" class="form-control" placeholder="Precio" required>
+           <input type="number" th:field="*{precio}" name="precio" id="precio" class="form-control" placeholder="Precio">
   		  </div>
+  		  
   		  <div class=col-md-4>
                 <span class="input-group-addon">EUR</span>
           </div>
-          </div>
-          </div>
           
+          </div>
+          </div>
           <div id="anadirProducto">
              <button type="submit" class="btn btn-lg btn-success btn-block">A&ntilde;adir Producto</button>
           </div>
+        
         </form>
 
       </div> <!-- /container -->
