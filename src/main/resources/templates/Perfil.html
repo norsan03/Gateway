@@ -39,8 +39,7 @@
               <li class="active"><a th:href="@{/Perfil}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
             </ul>
            <ul class="nav navbar-nav navbar-right">
-              <li><span class="glyphicon glyphicon-log-out"></span> Logout</li>
-            </ul> 
+			<li><a th:href="@{/cerrarSesion}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>            </ul> 
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
@@ -59,24 +58,23 @@
    <div class="container well">
    
 		<h2>Tu Perfil de Usuario</h2>
+		<h3>Bienvenido <span th:text="${uLogueado.email}">nombre</span></h3>
 
-                                
-	<form action="usuario" method="post">
+    <form th:action="@{/EditarPerfil}" th:object="${usuario}" class="form-signin" method="post" >
 		<fieldset>
 			<legend>Formulario de Edición de Usuarios</legend>
 
 			<label for="nom">Nombre:</label> <input type="text" name="nombre"
-				id="nom" value="${usuario.nombre }"/><br></br> 
+				id="nom" th:value="${uLogueado.nombre}"/><br></br> 
 			<label for="apellidos">Apellidos:</label> <input type="text" name="apellidos"
-				id="apellidos" value="${usuario.apellidos }"  /><br></br> 
+				id="apellidos" th:value="${uLogueado.apellidos}"  /><br></br> 
             <label for="email">Email:</label> <input type="text" name="email"
-				id="email" value="${usuario.email }"  /><br></br> 
+				id="email" th:value="${uLogueado.email}"  /><br></br> 
 			 <label for="ciudad">Ciudad:</label> <input type="text" name="ciudad"
-				id="ciudad" value="${usuario.ciudad }"  /><br></br> 
+				id="ciudad" th:value="${uLogueado.ciudad}"  /><br></br> 
 			<label for="clave">Password:</label> <input
-				type="password" name="password" id="clave" value="${usuario.password }"/>
-				 <input  name="id" id="id" value="${usuario.id }" type="hidden"/><br></br>  
-			<input type="hidden" value="EDITAR" name="accion"/>
+				type="password" name="password" id="clave" th:value="${uLogueado.password}"/>
+				
 		</fieldset>
 		<input type="submit" value="Modificar"/>
 

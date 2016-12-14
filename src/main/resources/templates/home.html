@@ -38,8 +38,8 @@
               <li><a th:href="@{/misProductos}"><span class="glyphicon glyphicon-list-alt"></span> Mis productos</a></li>
               <li><a th:href="@{/Perfil}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
             </ul>
-           <ul class="nav navbar-nav navbar-right">
-              <li><span class="glyphicon glyphicon-log-out"></span> Logout</li>
+          	<ul class="nav navbar-nav navbar-right">
+              <li><a th:href="@{/}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul> 
         </div><!--/.navbar-collapse -->
       </div>
@@ -86,7 +86,7 @@
 
 
         <div class="col-md-9 well" style="background-color: white">
-        <h1>Bienvenido <span th:text="${uregistrado.email}">nombre</span></h1>
+        <h1>Bienvenido <span th:text="${uLogueado.email}">nombre</span></h1>
         
 
 
