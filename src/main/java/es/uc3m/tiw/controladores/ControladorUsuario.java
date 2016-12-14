@@ -1,12 +1,14 @@
 package es.uc3m.tiw.controladores;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import es.uc3m.tiw.dominios.Usuario;
@@ -21,6 +23,7 @@ public class ControladorUsuario {
 		public String login(Model modelo){
 			return "index";
 		}
+	
 		
 		@RequestMapping(value = "/index", method = RequestMethod.GET)
 		public String login2(Model modelo){
@@ -36,7 +39,6 @@ public class ControladorUsuario {
 		public String loginUsuario(Model modelo, @ModelAttribute Usuario usuario){
 			Usuario uValidado = restTemplate.postForObject("http://localhost:8010/login", usuario, Usuario.class);
 			modelo.addAttribute("uValidado",uValidado);
-			modelo.addAttribute("logueado", true);
 			return "home";
 		}
 		
@@ -48,11 +50,15 @@ public class ControladorUsuario {
 
 		@RequestMapping(value = "/registroUsuario", method = RequestMethod.POST)
 		public String guardarUsuario(Model modelo, @ModelAttribute Usuario usuario){
+			
 			Usuario uregistrado = restTemplate.postForObject("http://localhost:8010/registroUsuario", usuario, Usuario.class);
-			modelo.addAttribute(uregistrado);
+			modelo.addAttribute("uregistrado", uregistrado);
 			return "home";
 			
+		
 		}
+			
+		//}
 		
 		
 		@RequestMapping(value="/Perfil")

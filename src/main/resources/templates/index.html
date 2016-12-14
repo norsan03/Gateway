@@ -29,12 +29,12 @@
         <a class="navbar-brand" th:href="@{/}">Wallapop TIW</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form action="login" method="post" class="navbar-form navbar-right">
+          <form action="@{/index}" th:object="${usuario}" method="post" class="navbar-form navbar-right">
             <div class="form-group">
               <input type="email" placeholder="Email" id ="email" class="form-control" name="email"/>
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" id ="password" class="form-control" name="clave"/>
+              <input type="password" placeholder="Password" id ="password" class="form-control" name="password"/>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
           </form>
