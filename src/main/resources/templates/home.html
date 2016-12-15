@@ -93,16 +93,15 @@
 
 
 		
-        <tr th:each="producto:${productos}" th:class="col-md-4 well">
-      
-				
-	         <!--   <img src="${usuario.apellidos }" alt="Generic product" width="240" height="180">  -->
-	          <h2><td th:text="${producto.titulo}">Titulo</td></h2>
-	          <p><a class="btn btn-info"  role="button">Ver Detalles &raquo;</a></p>
-
-	      
-			
-	     </tr> 
+        	<div th:each="producto : ${catalogo}" id="productos" class="col-md-3">
+	                  
+	                    <h2 th:text="${producto.titulo}">Titulo</h2>
+	                    <p th:text="${producto.descripcion}">Descripcion</p>
+						
+	        <p><a class="btn btn-info" th:href="@{/verProductoEspecifico/{producto.id}}" role="button">Ver Detalles &raquo;</a></p>
+     
+						
+	        </div>
 
 	
       	</div>

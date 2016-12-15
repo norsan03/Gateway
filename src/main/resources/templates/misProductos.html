@@ -76,7 +76,7 @@
 	                    <h2 th:text="${producto.titulo}">Titulo</h2>
 	                    <p th:text="${producto.descripcion}">Descripcion</p>
 						
-	        <p><a class="btn btn-info" th:href="@{/verProductoEspecifico}" role="button">Ver Detalles &raquo;</a></p>
+	        <p><a class="btn btn-info" th:href="@{/verProductoEspecifico/{producto.id}}" role="button">Ver Detalles &raquo;</a></p>
             <p><a class="btn btn-default btn-sm" th:href="@{/ModificarProducto}" role="button">Modificar &raquo;</a></p>
 						
 	        </div>

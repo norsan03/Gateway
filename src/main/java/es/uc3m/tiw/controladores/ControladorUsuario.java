@@ -3,6 +3,7 @@ package es.uc3m.tiw.controladores;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.client.RestTemplate;
 
+import es.uc3m.tiw.dominios.Producto;
 import es.uc3m.tiw.dominios.Usuario;
 
 
-@SessionAttributes({"uLogueado"})
+@SessionAttributes({"uLogueado","logueado"})
 @Controller
 public class ControladorUsuario {
 
@@ -33,15 +35,20 @@ public class ControladorUsuario {
 			return "index";
 		}
 		
-		@RequestMapping(value="/home", method = RequestMethod.GET)
-		public String home(Model modelo){
-			return "home";
-		}
-		
 		@RequestMapping(value = "/login", method = RequestMethod.POST)
 		public String loginUsuario(Model modelo, @ModelAttribute Usuario usuario){
+			
 			Usuario uLogueado = restTemplate.postForObject("http://localhost:8010/validar", usuario, Usuario.class);
 			modelo.addAttribute("uLogueado",uLogueado);
+			modelo.addAttribute("logueado",true);
+			
+			//Código para sacar el catalogo de producto al iniciar sesion a lo bruto
+			
+			/*ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
+
+			Producto[] catalogo = response.getBody();
+			modelo.addAttribute("catalogo", catalogo);*/
+			
 			return "home";
 		}
 		
