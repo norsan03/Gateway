@@ -43,9 +43,7 @@ public class ControladorUsuario {
 			modelo.addAttribute("logueado",true);
 			
 			//Código para sacar el catalogo de producto al iniciar sesion a lo bruto
-			
 			/*ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
-
 			Producto[] catalogo = response.getBody();
 			modelo.addAttribute("catalogo", catalogo);*/
 			
