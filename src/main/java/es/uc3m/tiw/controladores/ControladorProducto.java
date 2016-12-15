@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,6 +51,20 @@ public class ControladorProducto {
 		return "misProductos";
 	}
 	
+	@RequestMapping(value="/home")
+	public String verCatalogo(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuario){
+		
+		//Map<String, String> parametros = new HashMap<>();
+		//parametros.put("id",new Integer(id).toString());
+		
+		ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
+
+		Producto[] catalogo = response.getBody();
+		modelo.addAttribute("catalogo", catalogo);
+		
+		return "misProductos";
+	}
+	
 	
 	@RequestMapping(value="/altaProducto", method=RequestMethod.POST)
 	public String registrarProducto(Model modelo, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
@@ -84,6 +99,18 @@ public class ControladorProducto {
 
 		return "ModificarProducto";
 	}
+	
+	@RequestMapping(value="/verProductoEspecifico/{id}", method=RequestMethod.GET)
+	public String verProductoEspecifico(Model modelo, @PathVariable int id, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
+		
+		Producto productoEspecifico = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
+		modelo.addAttribute("productoEspecifico", productoEspecifico);
+
+		return "producto";
+	}
+	
+	
+	
 	
 	@RequestMapping(value="/ModificarProducto", method=RequestMethod.POST)
 	public String modificarProductoPOST(Model modelo, @ModelAttribute Producto producto){

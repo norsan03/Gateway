@@ -1,4 +1,4 @@
-package es.uc3m.tiw.controladores;
+/*package es.uc3m.tiw.controladores;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -55,3 +55,4 @@ public class ControladorChat {
 		return "listadoMensajes";
 	}
 }
+*/
