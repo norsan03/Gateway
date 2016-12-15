@@ -9,17 +9,20 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 
 import es.uc3m.tiw.dominios.Usuario;
 import es.uc3m.tiw.dominios.Admin;
 import es.uc3m.tiw.dominios.Mensaje;
+import es.uc3m.tiw.dominios.Producto;
 
 @SessionAttributes({"uLogueado"})
 @Controller
@@ -35,13 +38,13 @@ public class ControladorChat {
 	}
 	
 	@RequestMapping(value = "/mensajes", method = RequestMethod.GET)
-	public List<Mensaje> listaMensajesGet(HttpServletRequest request, Model modelo, @ModelAttribute Usuario usuario){
-		String emailReceptor = usuario.getEmail();
-		Map<String, String> parametros = new HashMap<>();
-		parametros.put("idReceptor", emailReceptor);
-	    List<Mensaje> listaMensajes = restTemplate.getForObject("http://localhost:8030/listarMensajes/{idReceptor}",parametros );
-	    return listaMensajes;
-	} 
+	public String listaMensajesGet(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuario){
+		String email= (String)usuario.getEmail();
+		ResponseEntity<Mensaje[]> response = restTemplate.getForEntity("http://localhost:8030/listarMensajes/{email}",Mensaje[].class, email);
+		Mensaje[] mensaje = response.getBody();
+		modelo.addAttribute("mensaje", mensaje);
+	    return "listadoMensajes";
+	}
 	
 	@RequestMapping(value = "/chat")
 	public String chat(Model modelo, @ModelAttribute Mensaje mensaje){
