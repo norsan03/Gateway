@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>Wallapop - Modificar Producto</title>
+
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
+		<script th:href="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
+		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
+
+  </head>
+
+  <body>
+
+
+
+
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" style="padding: 7px;"><img th:src="@{https://lh3.googleusercontent.com/eiHGogXLz3iBRZhKrdr7FOkw6q5P_iuGSwqGWmd1yRzMcc-B7V6xIKR9wzuqDrD61K4=w300}" alt="Wallapop" height="38" width="38" /></a> 
+        <a class="navbar-brand" th:href="@{/home}">Wallapop TIW</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li><a th:href="@{/home}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+              <li><a th:href="@{/misProductos}"><span class="glyphicon glyphicon-list-alt"></span> Mis productos</a></li>
+              <li class="active"><a th:href="@{/Perfil}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a th:href="@{/}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul> 
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+     
+	<div class="container well">
+   <br></br>
+   <br></br>
+   <br></br>
+   
+		<h2>Lista de Mensajes</h2>
+	
+
+                                
+	
+		<fieldset>
+			
+
+			<table class="table table-striped">
+
+			<tr>
+				<th>De</th>
+				<th>Producto</th>
+				<th>Mensaje</th>
+			</tr>
+			
+			<tr th:each="mensaje : ${mensajes}" >
+				<td th:text="${mensaje.IdEmisor}" ></td>
+				<td th:text="${mensaje.IdProducto}" ></td>
+				<td th:text="${mensaje.mensaje}"></td>
+			</tr>
+
+	</table>
+		</fieldset>
+		
+
+	
+	
+
+                               
+    </div>
+   
+
+      <footer style="background-color: #555;
+      color: white;
+      padding: 15px;">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+   
+  </body>
+</html>

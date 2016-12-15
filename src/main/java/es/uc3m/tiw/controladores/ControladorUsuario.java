@@ -28,7 +28,6 @@ public class ControladorUsuario {
 			return "index";
 		}
 	
-		
 		@RequestMapping(value = "/index", method = RequestMethod.GET)
 		public String login2(Model modelo){
 			return "index";
@@ -51,30 +50,22 @@ public class ControladorUsuario {
 			return "registroUsuario";
 		}
 		
-
 		@RequestMapping(value = "/registroUsuario", method = RequestMethod.POST)
 		public String guardarUsuario(Model modelo, @ModelAttribute Usuario usuario){
-			
 			Usuario uLogueado = restTemplate.postForObject("http://localhost:8010/registroUsuario", usuario, Usuario.class);
 			modelo.addAttribute("uLogueado", uLogueado);
 			return "home";
-			
-		
 		}
 		
 		 @RequestMapping(value="/cerrarSesion", method=RequestMethod.GET)
 		 public String cerrarSesion(SessionStatus status) {
 		    status.setComplete();
 		    return "/index";
-		 }
-			
+		}
 		
 		@RequestMapping(value="/Perfil")
 		public String verUsuario(){
 			return "Perfil";
-			
 		}
-		
-
 		
 	}
