@@ -1,14 +1,20 @@
 package es.uc3m.tiw.controladores;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,17 +29,39 @@ public class ControladorProducto {
 	
 
 	
-	@RequestMapping(value="/altaProducto", method=RequestMethod.GET)
+	@RequestMapping(value="/nuevoProducto", method=RequestMethod.GET)
 	public String darAltaProductoPOST(Model modelo, @ModelAttribute Producto producto){
-		Producto pRegistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
-		modelo.addAttribute("pRegistrado", pRegistrado);
-		return "misProductos";
+		/*Producto pRegistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
+		modelo.addAttribute("pRegistrado", pRegistrado);*/
+		return "altaProducto";
 	}
 	
 	@RequestMapping(value="/misProductos", method=RequestMethod.GET)
-	public String verProductosUsuario(Model modelo, @ModelAttribute Producto producto){
-		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
-		modelo.addAttribute(pregistrado);*/
+	public String verProductosUsuario(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuario){
+		int id = (int)usuario.getId();
+		//Map<String, String> parametros = new HashMap<>();
+		//parametros.put("id",new Integer(id).toString());
+		
+		ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerMisProductos/{id}",Producto[].class, id);
+
+		Producto[] misProductos = response.getBody();
+		modelo.addAttribute("misProductos", misProductos);
+		
+		return "misProductos";
+	}
+	
+	
+	@RequestMapping(value="/altaProducto", method=RequestMethod.POST)
+	public String registrarProducto(Model modelo, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
+		producto.setUsuario((int) usuario.getId());
+		Producto pregistrado = restTemplate.postForObject("http://localhost:8020/guardarProducto", producto, Producto.class);
+		modelo.addAttribute(pregistrado);
+		int id = (int)usuario.getId();
+		ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerMisProductos/{id}",Producto[].class, id);
+
+		Producto[] misProductos = response.getBody();
+		modelo.addAttribute("misProductos", misProductos);
+
 		return "misProductos";
 	}
 	

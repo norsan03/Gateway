@@ -63,18 +63,23 @@
         	<h5>Bienvenido <span th:text="${uLogueado.email}">nombre</span></h5>
         
         	
-        	<p><a class="btn btn-lg btn-success" th:href="@{/altaProducto}"> Nuevo Producto</a></p>
+        	<p><a class="btn btn-lg btn-success" th:href="@{/nuevoProducto}"> Nuevo Producto</a></p>
         </div>  
 
         <div class="col-md-9 well" style="background-color: white">
         
-          
-          <div th:each="pRegistrado : ${productos}" class="col-md-4 well" > 
         
-          <!--  <h2> th:text="${pRegistrado.titulo}>Titulo</h2>-->
-	          <p><a class="btn btn-info" th:href="@{/producto}"  role="button">Ver Detalles &raquo;</a></p>
-	          <p><a class="btn btn-info" th:href="@{/ModificarProducto}"  role="button">Modificar &raquo;</a></p>
-      	  </div>
+        	
+      	  
+      	    <div th:each="producto : ${misProductos}" id="productos" class="col-md-3">
+	                  
+	                    <h2 th:text="${producto.titulo}">Titulo</h2>
+	                    <p th:text="${producto.descripcion}">Descripcion</p>
+						
+	        <p><a class="btn btn-info" th:href="@{/verProductoEspecifico}" role="button">Ver Detalles &raquo;</a></p>
+            <p><a class="btn btn-default btn-sm" th:href="@{/ModificarProducto}" role="button">Modificar &raquo;</a></p>
+						
+	        </div>
 
       
 
