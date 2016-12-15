@@ -41,8 +41,8 @@ public class ControladorChat {
 	public String listaMensajesGet(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuario){
 		String email= (String)usuario.getEmail();
 		ResponseEntity<Mensaje[]> response = restTemplate.getForEntity("http://localhost:8030/listarMensajes/{email}",Mensaje[].class, email);
-		Mensaje[] mensaje = response.getBody();
-		modelo.addAttribute("mensaje", mensaje);
+		Mensaje[] misMensajes = response.getBody();
+		modelo.addAttribute("mensaje", misMensajes);
 	    return "listadoMensajes";
 	}
 	
