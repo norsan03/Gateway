@@ -38,7 +38,7 @@
               <li><a th:href="@{/Perfil}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a th:href="@{/}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              <li><a th:href="@{/cerrarSesion}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul> 
         </div><!--/.navbar-collapse -->
       </div>
@@ -61,24 +61,20 @@
         	<h3> ¿Quieres vender cosas que ya no usas?</h3>
         	<h4> ¡Hazlo en Wallapop!</h4>
         	<h5>Bienvenido <span th:text="${uLogueado.email}">nombre</span></h5>
+        
         	
         	<p><a class="btn btn-lg btn-success" th:href="@{/altaProducto}"> Nuevo Producto</a></p>
         </div>  
 
         <div class="col-md-9 well" style="background-color: white">
         
-          <tr th:each="producto:${productos}" th:class="">
+          
+          <div th:each="pRegistrado : ${productos}" class="col-md-4 well" > 
         
-        	<tr class="col-md-4 well">
-      
-				
-	          <h2><td th:text="${producto.titulo}">Titulo</td></h2>
+          <!--  <h2> th:text="${pRegistrado.titulo}>Titulo</h2>-->
 	          <p><a class="btn btn-info" th:href="@{/producto}"  role="button">Ver Detalles &raquo;</a></p>
 	          <p><a class="btn btn-info" th:href="@{/ModificarProducto}"  role="button">Modificar &raquo;</a></p>
-
-	      
-			</tr> 
-	     </tr> 
+      	  </div>
 
       
 

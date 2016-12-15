@@ -8,7 +8,7 @@ public class Producto {
 		// TODO Auto-generated constructor stub
 	}
 	public Producto(int id, String titulo, String categoria, String descripcion, String estado, String ciudad,
-			String imagen, int precio, int usuario) {
+			/*String imagen,*/ int precio, int usuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -16,7 +16,7 @@ public class Producto {
 		this.descripcion = descripcion;
 		this.estado = estado;
 		this.ciudad = ciudad;
-		this.imagen = imagen;
+		//this.imagen = imagen;
 		this.precio = precio;
 		this.usuario = usuario;
 	}
@@ -29,7 +29,7 @@ public class Producto {
 	private String descripcion;
 	private String estado;
 	private String ciudad;
-	private String imagen;
+	//private String imagen;
 	private int precio;
 	private int usuario;
 	
@@ -72,12 +72,12 @@ public class Producto {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
-	public String getImagen() {
+	/*public String getImagen() {
 		return imagen;
 	}
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
-	}
+	}*/
 	public int getPrecio() {
 		return precio;
 	}
