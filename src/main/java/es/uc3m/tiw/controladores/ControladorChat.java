@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
@@ -28,7 +29,7 @@ public class ControladorChat {
 		mensaje.setIdEmisor(usuario.getEmail());
 		mensaje.setIdReceptor(email);
 		restTemplate.postForObject("http://localhost:8030/guardarMensaje", mensaje, Mensaje.class);
-		return "perfil";
+		return "Perfil";
 	}
 	
 	@RequestMapping(value = "/listaMensajes", method = RequestMethod.GET)
@@ -36,7 +37,7 @@ public class ControladorChat {
 		String email = usuario.getEmail();
 		ResponseEntity<Mensaje[]> response = restTemplate.getForEntity("http://localhost:8030/listarMensajes/{email}",Mensaje[].class, email);
 		Mensaje[] allMensajes = response.getBody();
-		modelo.addAttribute("mensaje", allMensajes);
+		modelo.addAttribute("mensajes", allMensajes);
 	    return "listadoMensajes";
 	}
 
