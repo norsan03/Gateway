@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
@@ -59,10 +60,10 @@ public class ControladorProducto {
 		
 		ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
 
-		Producto[] catalogo = response.getBody();
-		modelo.addAttribute("catalogo", catalogo);
+		Producto[] productos = response.getBody();
+		modelo.addAttribute("productos", productos);
 		
-		return "misProductos";
+		return "home";
 	}
 	
 	
@@ -108,15 +109,19 @@ public class ControladorProducto {
 
 		return "producto";
 	}
-	
-	
-	
-	
+		
 	@RequestMapping(value="/ModificarProducto", method=RequestMethod.POST)
 	public String modificarProductoPOST(Model modelo, @ModelAttribute Producto producto){
 		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
 		modelo.addAttribute(pregistrado);*/
 		return "ModificarProducto";
+	}
+	
+	@RequestMapping(value = "/busquedaSimple", method = RequestMethod.POST)
+	public String catalogoGet(Model modelo, @RequestParam(name="busquedaIntroducida") String texto){
+		Producto[] productos = restTemplate.postForObject("http://localhost:8020/busquedaSimple", texto, Producto[].class);
+		modelo.addAttribute("productos",productos);
+		return "home";
 	}
 
 	

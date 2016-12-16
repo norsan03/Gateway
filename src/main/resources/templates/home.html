@@ -62,8 +62,9 @@
         
           <div class="well"  style="background-color: white">
           <h4>Búsqueda Simple</h4>
-            <form class="form-group input-group" role="search" action="busqueda" method="post">
-              <input type="text" class="form-control" placeholder="Buscar.." name="busqueda"/>
+            <form th:action="@{/busquedaSimple}" th:object="${producto}" class="form-signin" method="post" >
+
+              <input type="text" class="form-control" placeholder="Buscar.." name="busquedaIntroducida"/>
               <span class="input-group-btn">
                 <button class="btn btn-default" type="submit">
                   <span class="glyphicon glyphicon-search"></span>
@@ -89,11 +90,8 @@
         <h1>Bienvenido <span th:text="${uLogueado.email}">nombre</span></h1>
         
 
-
-
-
 		
-        	<div th:each="producto : ${catalogo}" id="productos" class="col-md-3">
+        	<div th:each="producto : ${productos}" id="productos" class="col-md-3">
 	                  
 	                    <h2 th:text="${producto.titulo}">Titulo</h2>
 	                    <p th:text="${producto.descripcion}">Descripcion</p>
