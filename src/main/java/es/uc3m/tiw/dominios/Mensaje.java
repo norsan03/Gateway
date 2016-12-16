@@ -3,9 +3,9 @@ package es.uc3m.tiw.dominios;
 public class Mensaje {
 	
 	private long id;
+	private long IdProducto;
 	private String IdEmisor;
 	private String IdReceptor;
-	private long IdProducto;
 	private String mensaje;
 
 	public Mensaje() {
