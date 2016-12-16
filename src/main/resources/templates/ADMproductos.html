@@ -56,17 +56,19 @@
     <div class="container text-center" style="padding: 15px">
       <div class="row">
 
-
+	<h1>Bienvenido <span th:text="${aLogueado.email}">nombre</span></h1>
 
         <div class="col-md-12 well" style="background-color: white">
 
-        <tr th:each="producto:${productos}" th:class="col-md-3 well">
-
-
-	          <h2>${producto.titulo }</h2>
-	          <p><a class="btn btn-info" style="background-color: #23C5B2" th:href="@{ADMproductoESP}" role="button">Detalles</a></p>
-
-		</tr>
+        	<div th:each="producto : ${catalogo}" id="productos" class="col-md-3">
+	                  
+	                    <h2 th:text="${producto.titulo}">Titulo</h2>
+	                    <p th:text="${producto.descripcion}">Descripcion</p>
+						
+	        <p><a class="btn btn-info" th:href="@{/ADMverProductoEspecifico/{producto.id}}" role="button">Ver Detalles &raquo;</a></p>
+     
+						
+	        </div>
 
     </div>
     </div>

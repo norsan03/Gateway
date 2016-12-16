@@ -48,11 +48,17 @@ public class ControladorUsuario {
 			
 			
 			//Código para sacar el catalogo de producto al iniciar sesion a lo bruto
+<<<<<<< HEAD
 			
 			ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
 
 			Producto[] productos = response.getBody();
 			modelo.addAttribute("productos", productos);
+=======
+			/*ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
+			Producto[] catalogo = response.getBody();
+			modelo.addAttribute("catalogo", catalogo);*/
+>>>>>>> 1100d364951d4db56f0a490dbb1a60b23a4ecd3f
 			
 			return "home";
 		}

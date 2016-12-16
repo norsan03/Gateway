@@ -2,6 +2,15 @@ package es.uc3m.tiw.dominios;
 
 public class Producto {
 
+	private int id;
+	private String titulo;
+	private String categoria;
+	private String descripcion;
+	private String estado;
+	private String ciudad;
+	//private String imagen;
+	private int precio;
+	private int usuario;
 	
 	public Producto() {
 		super();
@@ -20,21 +29,6 @@ public class Producto {
 		this.precio = precio;
 		this.usuario = usuario;
 	}
-	
-	
-	
-	private int id;
-	private String titulo;
-	private String categoria;
-	private String descripcion;
-	private String estado;
-	private String ciudad;
-	//private String imagen;
-	private int precio;
-	private int usuario;
-	
-	
-	
 	
 	public int getId() {
 		return id;
