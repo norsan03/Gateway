@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 
@@ -77,6 +79,20 @@ public class ControladorAdmin {
 	@RequestMapping(value = "/ADMusuarios")
 	public String Usuarios(Model modelo, @ModelAttribute Usuario usuario){
 		return "ADMusuarios";
+	}
+	
+	@RequestMapping(value="/ADMverProductoEspecifico/{id}", method=RequestMethod.GET)
+	public String ADMverProductoEspecifico(Model modelo, @PathVariable int id, @ModelAttribute Producto producto,@SessionAttribute(value="aLogueado") Admin admin){	
+		Producto productoEspecifico = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
+		modelo.addAttribute("productoEspecifico", productoEspecifico);
+		return "ADMproductoESP";
+	}
+	
+	@RequestMapping(value="/ADMverUsuarioEspecifico/{id}", method=RequestMethod.GET)
+	public String ADMverUsuarioEspecifico(Model modelo, @PathVariable int id, @ModelAttribute Usuario usuario,@SessionAttribute(value="aLogueado") Admin admin){	
+		Usuario usuarioEspecifico = restTemplate.postForObject("http://localhost:8020/obtenerUsuario/{id}", usuario, Usuario.class, id);
+		modelo.addAttribute("usuarioEspecifico", usuarioEspecifico);
+		return "ADMusuarioESP";
 	}
 	
 }

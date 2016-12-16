@@ -60,16 +60,17 @@
 
         <div class="col-md-12 well" style="background-color: white">
 
-        <tr th:each="usuario:${usuarios}" th:class="col-md-3 well">
+        	<div th:each="usuario : ${usuarios}" id="usuarios" class="col-md-3">
+	                  
+	                    <h2 th:text="${usuario.nombre}">Nombre</h2>
+	                    <p th:text="${usuario.apellido}">Apellido</p>
+						
+	        <p><a class="btn btn-info" th:href="@{/ADMverUsuarioEspecifico/{usuario.id}}" role="button">Ver Detalles &raquo;</a></p>
+     
+						
+	        </div>
 
-
-	          <h2>${usuario.email }</h2>
-	          <a class="btn btn-info" style="background-color: #23C5B2" th:href="@{ADMusuarioESP}" role="button">Detalles</a> 
-
-
-		    </tr>
-
-      	</div>
+    </div>
     
     </div>
     

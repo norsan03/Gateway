@@ -58,18 +58,16 @@
 
          <div class="container well">
 
-          <h2 style="color: #23C5B2"><u>Perfil de ${usuario.email }</u></h2>
+          <h2 style="color: #23C5B2" th:text="@{usuario.email}">Perfil</h2>
                         
 
 
-                <h3> Nombre: ${usuario.nombre } </h3>
-                <h3> Apellidos: ${usuario.apellidos } </h3>
-                <h3> Ciudad: ${usuario.ciudad } </h3>
-                <h3> Contrase�a: ${usuario.password } </h3>
-                <h3> Email: ${usuario.email } </h3>
+                <h3 th:text="@{usuario.nombre}"> Nombre</h3>
+                <h3 th:text="@{usuario.apellidos}"> Apellidos</h3>
+                <h3 th:text="@{usuario.nombre}"> Ciudad</h3>
 
-                <a class="btn btn-success " th:href="@{ADMusuarioEDIT}" role="button">Editar</a>
-                <a class="btn btn-danger" role="button" href="#">Dar de baja</a>
+                <a class="btn btn-success " th:href="@{/ADMmodificarUsuario/{usuario.id}}"  role="button">Editar</a>
+                <a class="btn btn-danger" role="button" th:href="@{/ADMmodificarUsuario/{usuario.id}}" >Dar de baja</a>
 
       </div>      
 
