@@ -29,28 +29,28 @@ public class ControladorChat {
 	@Autowired
 	RestTemplate restTemplate;
 	
-	@PostMapping(value="chat")
-	public String chat (Model modelo, @RequestParam(name="idPropietario") int idPropietario, @ModelAttribute Mensaje mensaje,@SessionAttribute(value="uLogueado") Usuario usuario){
-		modelo.addAttribute("idPropietario", idPropietario);
+	@RequestMapping(value = "/chatt", method = RequestMethod.GET)
+	public String chat (Model modelo, @RequestParam(name="IdReceptor") int IdReceptor, @ModelAttribute Mensaje mensaje,@SessionAttribute(value="uLogueado") Usuario usuario){
+		modelo.addAttribute("IdReceptor", IdReceptor);
 		
 		
 		return "chat";
 		
 	}
 		
-	
-	@PostMapping(value="/RegistroMensaje")
-	public String enviarMensaje(Model modelo, @RequestParam(name="idPropietario") int idPropietario, @ModelAttribute Mensaje mensaje,@SessionAttribute(value="uLogueado") Usuario usuario){
+	@RequestMapping(value = "/RegistroMensaje", method = RequestMethod.POST)
+	public String enviarMensaje(Model modelo, @RequestParam int IdReceptor, @ModelAttribute Mensaje mensaje,@SessionAttribute(value="uLogueado") Usuario usuario){
 		
-		Long idEmisor = usuario.getId();
+		String idEmisor = Long.toString(usuario.getId());
+		String idReceptor = Integer.toString(IdReceptor);
 		
 		Map<String, String> ids = new HashMap<>();
-		
-		ids.put("idPropietario",new Integer(idPropietario).toString());
-		ids.put("idEmisor",new Long(idEmisor).toString());
-	
+		ids.put("idPropietario",idEmisor);
+		ids.put("idReceptor", idReceptor);
+				
 		restTemplate.postForObject("http://localhost:8030/guardarMensaje{ids}", mensaje, Mensaje.class,ids);
-		return "Perfil";
+		
+		return "home";
 	}
 	/*
 	@RequestMapping(value = "/bandejaEntrada", method = RequestMethod.GET)

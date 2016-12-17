@@ -47,21 +47,27 @@
   		    <br></br>
    <br></br>
    <br></br>
-				<form  th:action="@{/RegistroMensaje/{idPropietario}" th:object="${mensaje}" method="post" class="form-horizontal" id="sendMsg">
+   					
+	                  
+	                    <h2 th:text="${IdReceptor}">Titulo</h2>
+   				
+	            
+			 	<form  th:action="@{/RegistroMensaje}" th:object="${mensaje}" method="post" class="form-horizontal">
                  
                  
                    <div class="form-group">
                      <label  class="col-md-3"  for="exampleInputFile"><h5 class="text-center"><strong>Descripcion Mensaje</strong></h5></label> 
                     <div class="col-md-7">
                     <textarea th:field="*{mensaje}" id="mensaje" type="text" class="form-control" rows ="15" data-validation="required" data-validation-length="max255" data-validation-error-msg="Introduzca un mensaje" placeholder="Mensaje" name="mensaje"> </textarea>
+                    <input type="hidden" th:field="${IdReceptor}" />
                     </div>
                   </div>
                   <br/>
                       <div id="sendMsgButon">
-                        <button type="submit" class="btn btn-default" text-align="center" name="Enviar">Enviar!</button>
+                        <button type="submit" class="btn btn-default btn-xs" name="Enviar">Enviar!</button>
                       </div>
                 </form>
-                
+              
   
 			   <br></br>
    <br></br>
