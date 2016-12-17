@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
@@ -11,6 +10,81 @@
 		<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
 		<script th:href="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
 		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
+		
+		<script>
+function validate() {
+			
+			/*Validacion Titulo*/
+				var n = document.forms["Form"]["titulo"].value;
+				if (n==null || n=="") {
+					alert("Por favor escriba el titulo del producto");
+				return false;
+				}
+			
+			/*Validacion Categoria*/
+				var cat = document.forms["Form"]["categoria"].value;
+				if (cat==null || cat=="") {
+					alert("Por favor escriba la categoria del producto");
+				return false;
+				}
+				
+				/*Validacion Descripcion*/
+				var d = document.forms["Form"]["descripcion"].value;
+				if (d==null || d=="") {
+					alert("Por favor rellene la descripción del producto");
+				return false;
+				}
+				
+				/*Validacion Estado*/
+				var est = document.forms["Form"]["estado"].value;
+				if (est==null || est=="") {
+					alert("Por favor introduzca el estado del producto");
+				return false;
+				}
+				
+				/*Validacion Ciudad*/
+				var c = document.forms["Form"]["ciudad"].value;
+				if (c==null || c=="") {
+					alert("Por favor rellene su ciudad");
+				return false;
+				}
+				
+				
+				
+				/*Validacion Precio*/
+				var p = document.forms["Form"]["precio"].value;
+				if (p==null || p=="") {
+					alert("Por favor indique el precio");
+				return false;
+				}
+				
+				var patron=/^\d+$/;/*expresion regular*/
+				if ((patron.test(p))==false){
+				alert("Por favor introduzca una precio valido. El precio no puede ser negativo");
+				return false;
+				}
+			
+				
+			/*Registro correcto del producto*/
+			alert("Se ha modificado el producto correctamente");
+			return true;
+				
+		}
+
+	</script>
+	
+	<script>
+		function logout (){
+			alert("Se ha cerrado su sesion.");
+			
+		}
+		
+		function borrar (){
+			confirm("¿Esta seguro de que quiere realizar esta accion? Confirme el borrado.");
+			
+		}
+		
+		</script>
 
   </head>
 
@@ -39,8 +113,7 @@
               <li class="active"><a th:href="@{/Perfil}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a th:href="@{/}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-            </ul> 
+              <li><a th:href="@{/cerrarSesion}" onclick="return logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>            </ul> 
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
@@ -62,7 +135,7 @@
 		<h3>Formulario de Edición del Producto</h3>
 
                                 
-	<form th:action="@{/ModificarProducto}" th:object="${producto}" class="form-signin" method="post" >
+	<form th:action="@{/ModificarProducto}" th:object="${producto}" class="form-signin" method="post" name="Form">
 		<fieldset>
 			
 
@@ -79,19 +152,19 @@
 			<input th:field="*{estado}" type="text" name="estado" id="estado" /><br/>
 			
 			<label for="ciudad">Ciudad:</label>
-			<input th:field="*{ciudad}" type="password" name="ciudad" id="ciudad" /><br/>
+			<input th:field="*{ciudad}" type="text" name="ciudad" id="ciudad" /><br/>
 			
 			<label for="precio">Precio:</label>
-			<input th:field="*{precio}" type="password" name="precio" id="precio" /><br/>
+			<input th:field="*{precio}" type="number" name="precio" id="precio" /><br/>
 			
 			<input  name="id" id="id" value="${usuario.id }" type="hidden" /> 
 			<input type="hidden" value="EDITAR" name="accion" />
 		</fieldset>
-		<input type="submit" value="Modificar" />
+		<input type="submit" onclick="return validate()" value="Modificar" />
 
 	</form>
 		<div>
-		<a th:href="@{/borrarProducto}">Borrar</a>
+		<a th:href="@{/borrarProducto}" onclick="return borrar()">Borrar</a>
 		</div>
 
                                
