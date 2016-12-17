@@ -25,20 +25,20 @@ public class ControladorChat {
 	RestTemplate restTemplate;
 	
 	@PostMapping(value="/enviarMensaje/{EmailUsuario}")
-	public String enviarMensaje(@PathVariable String email, @SessionAttribute(value="uLogueado")Usuario usuario, @ModelAttribute Mensaje mensaje){
+	public String enviarMensaje(@PathVariable String emailReceptor, @SessionAttribute(value="uLogueado")Usuario usuario, @ModelAttribute Mensaje mensaje){
 		mensaje.setIdEmisor(usuario.getEmail());
-		mensaje.setIdReceptor(email);
+		mensaje.setIdReceptor(emailReceptor);
 		restTemplate.postForObject("http://localhost:8030/guardarMensaje", mensaje, Mensaje.class);
 		return "Perfil";
 	}
 	
-	@RequestMapping(value = "/listaMensajes", method = RequestMethod.GET)
-	public String listaMensajesGet(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuario){
-		String email = usuario.getEmail();
-		ResponseEntity<Mensaje[]> response = restTemplate.getForEntity("http://localhost:8030/listarMensajes/{email}",Mensaje[].class, email);
-		Mensaje[] allMensajes = response.getBody();
-		modelo.addAttribute("mensajes", allMensajes);
-	    return "listadoMensajes";
+	@RequestMapping(value = "/bandejaEntrada", method = RequestMethod.GET)
+	public String bandejaEntrada(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuario){
+		String emailReceptor = usuario.getEmail();
+		ResponseEntity<Mensaje[]> response = restTemplate.getForEntity("http://localhost:8030/listarMensajes/{email}",Mensaje[].class, emailReceptor);
+		Mensaje[] mensajesRecibidos = response.getBody();
+		modelo.addAttribute("mensajes", mensajesRecibidos);
+	    return "bandejaEntrada";
 	}
 
 	@RequestMapping(value = "/chat")
@@ -46,8 +46,8 @@ public class ControladorChat {
 		return "chat";
 	}
 	
-	@RequestMapping(value = "/listadoMensajes")
+	@RequestMapping(value = "/bandejaEntrada")
 	public String chat2(Model modelo){
-		return "listadoMensajes";
+		return "bandejaEntrada";
 	}
 }

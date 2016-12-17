@@ -18,8 +18,6 @@
 
 
 
-
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -97,7 +95,7 @@
 	                    <p th:text="${producto.descripcion}">Descripcion</p>
 						
 	        <p><a class="btn btn-info" th:href="@{/verProductoEspecifico/{producto.id}}" role="button">Ver Detalles &raquo;</a></p>
-     
+     		<p><a class="btn btn-info" th:href="@{/chat}" role="button">¡Lo Quiero! &raquo;</a></p>
 						
 	        </div>
 
@@ -109,15 +107,11 @@
     </div>
 
 
-
-
       <footer style="background-color: #555;
       color: white;
       padding: 15px;">
         <p>&copy; 2016 Company, Inc.</p>
       </footer>
-
-
 
 
   </body>

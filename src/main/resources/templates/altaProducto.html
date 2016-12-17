@@ -11,6 +11,62 @@
 		<script th:href="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
 		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
 
+<script>
+function validate() {
+			
+			/*Validacion Titulo*/
+				var n = document.forms["Form"]["titulo"].value;
+				if (n==null || n=="") {
+					alert("Por favor escriba el titulo del producto");
+				return false;
+				}
+			
+			/*Validacion Categoria*/
+				var cat = document.forms["Form"]["categoria"].value;
+				if (cat==null || cat=="") {
+					alert("Por favor escriba la categoria del producto");
+				return false;
+				}
+				
+				/*Validacion Descripcion*/
+				var d = document.forms["Form"]["descripcion"].value;
+				if (d==null || d=="") {
+					alert("Por favor rellene la descripción del producto");
+				return false;
+				}
+				
+				/*Validacion Ciudad*/
+				var c = document.forms["Form"]["ciudad"].value;
+				if (c==null || c=="") {
+					alert("Por favor rellene su ciudad");
+				return false;
+				}
+				
+				
+				
+				/*Validacion Precio*/
+				var p = document.forms["Form"]["precio"].value;
+				if (p==null || p=="") {
+					alert("Por favor indique el precio");
+				return false;
+				}
+				
+				var patron=/^\d+$/;/*expresion regular*/
+				if ((patron.test(p))==false){
+				alert("Por favor introduzca una precio valido. El precio no puede ser negativo");
+				return false;
+				}
+			
+				
+			/*Registro correcto del producto*/
+			alert("Se ha registrado el producto correctamente");
+			return true;
+				
+		}
+
+	</script>
+
+
   </head>
 
   <body>
@@ -56,7 +112,7 @@
         
         
         
-        <form th:action="@{/altaProducto}" th:object="${producto}" class="form-signin" method="post"> 
+        <form th:action="@{/altaProducto}" th:object="${producto}" class="form-signin" method="post" name="Form"> 
           
           <div class="form-group">
           <label for="titulo" class="sr-only">T&iacute;tulo del Producto</label>
@@ -85,7 +141,7 @@
           
          
           <div id="anadirProducto">
-             <button type="submit" class="btn btn-lg btn-success btn-block">A&ntilde;adir Producto</button>
+             <button type="submit" onclick="return validate()" class="btn btn-lg btn-success btn-block">A&ntilde;adir Producto</button>
           </div>
         
         </form>
