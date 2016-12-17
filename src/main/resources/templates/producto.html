@@ -56,48 +56,51 @@
 
 
     <div class="container text-center" style="padding: 15px">
-    
-    
-      
-     	<div class="row"> 
-        <div class="col-md-8">
-          <h2 th:text="${producto.titulo}">Titulo</h2>
+   
+        
+         <div class="container">
+        <div id="titulo">
+            <h2><strong><span th:text="'Producto:' + ${producto.titulo}"></span></strong></h2>
         </div>
+        <div id="perfil">
+        	
+        	<div>
+        		<label class="col-md-12">Nombre</label>
+        		<span class="col-md-12" th:text="${producto.titulo}"></span>
+        	</div>
+        	
+        	<div>
+        		<label class="col-md-12">Descripcion</label>
+        		<span class="col-md-12" th:text="${producto.descripcion}"></span>
+        	</div>
+        	
+        	<div>
+        		<label class="col-md-12">Categoria</label>
+        		<span class="col-md-12" th:text="${producto.categoria}"></span>
+        	</div>
+        	        	
+        	<div>
+        		<label class="col-md-12">Ciudad</label>
+        		<span class="col-md-12" th:text="${producto.ciudad}"></span>
+        	</div>
+        	
+        	<div>
+        		<label class="col-md-12">Estado</label>
+        		<span class="col-md-12" th:text="${producto.estado}"></span>
+        	</div>
+        	
+        	<div class="row">
 
 
-    <div class="col-md-4 ">
-
-          <div class="row" >
-            <div class="well">
-              <h3 style="color: #23C5B2">Descripcion: <p th:text="${producto.descripcion}">Descripcion</p></h3>
-              <h3> Categoria: <p th:text="${producto.categoria}">Cat</p></h3>
-              <h3> Precio: <p th:text="${producto.precio}">Precio</p>/<h3>
-             
-              
-            </div>
+        	</div>
+        	
         </div>
-      
-        <div class="row" >
-            <div class="well">
-              <h3>Propietario: Usuario con ID <p th:text="${producto.usuario}">Usuario</p></h3>
-              <p>Si estás interesado en este producto, puedes contactar con el vendedor: </p>
-              <a class="btn btn-info" href="#" role="button" style="background-color: #23C5B2"><span class="glyphicon glyphicon-envelope"></span> CHAT</a>
-            </div>
         </div>
-
-      </div>
-      </div>
-      
-      <div class="row well"> 
-
-        <a class="btn btn-success " th:href="@{/modificarProducto/{producto.id}}" role="button" >Editar</a>
-        <a class="btn btn-danger" role="button" th:href="@{/eliminarProducto/{producto.id}}">Dar de baja</a>
-
-      </div> 
+        </div>
+ 
       
       
-      
-    </div>
+  
     
 
 

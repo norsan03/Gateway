@@ -70,8 +70,8 @@ public class ControladorProducto {
 	@RequestMapping(value="/altaProducto", method=RequestMethod.POST)
 	public String registrarProducto(Model modelo, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
 		producto.setUsuario((int) usuario.getId());
-		Producto pregistrado = restTemplate.postForObject("http://localhost:8020/guardarProducto", producto, Producto.class);
-		modelo.addAttribute(pregistrado);
+		/*Producto pregistrado = */restTemplate.postForObject("http://localhost:8020/guardarProducto", producto, Producto.class);
+		/*modelo.addAttribute(pregistrado);*/
 		int id = (int)usuario.getId();
 		ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerMisProductos/{id}",Producto[].class, id);
 
@@ -89,9 +89,19 @@ public class ControladorProducto {
 	}
 	
 	@RequestMapping(value="/borrarProducto", method=RequestMethod.GET)
-	public String borrarProducto(Model modelo, @ModelAttribute Producto producto){
-		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
-		modelo.addAttribute(pregistrado);*/
+	public String borrarProducto(Model modelo,@RequestParam(name="id") int id,@ModelAttribute Producto producto, @SessionAttribute(value="uLogueado") Usuario usuario ){
+		
+		int idUsuario = (int)usuario.getId();
+		restTemplate.postForObject("http://localhost:8020/eliminarProducto/{id}", producto, Producto.class, id);
+		
+		// No lo queremos para nada el borrado pero por si acaso luego le veo utilidad
+		//modelo.addAttribute("borrado",borrado);
+		
+
+		ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerMisProductos/{idUsuario}",Producto[].class, idUsuario);
+		Producto[] misProductos = response.getBody();
+		modelo.addAttribute("misProductos", misProductos);
+		
 		return "misProductos";
 	}
 	
@@ -101,11 +111,11 @@ public class ControladorProducto {
 		return "ModificarProducto";
 	}
 	
-	@RequestMapping(value="/verProductoEspecifico/{id}", method=RequestMethod.GET)
-	public String verProductoEspecifico(Model modelo, @PathVariable int id, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
+	@RequestMapping(value="/verProductoEspecifico", method=RequestMethod.GET)
+	public String verProductoEspecifico(Model modelo, @RequestParam(name="id") int id, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
 		
-		Producto productoEspecifico = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
-		modelo.addAttribute("productoEspecifico", productoEspecifico);
+		Producto productoE = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
+		modelo.addAttribute("producto", productoE);
 
 		return "producto";
 	}

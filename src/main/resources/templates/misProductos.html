@@ -66,7 +66,7 @@
         	<p><a class="btn btn-lg btn-success" th:href="@{/nuevoProducto}"> Nuevo Producto</a></p>
         </div>  
 
-        <div class="col-md-9 well" style="background-color: white">
+     	<div class="col-md-9 well" style="background-color: white">
         
         
         	
@@ -76,16 +76,18 @@
 	                    <h2 th:text="${producto.titulo}">Titulo</h2>
 	                    <p th:text="${producto.descripcion}">Descripcion</p>
 						
-	        <p><a class="btn btn-info" th:href="@{/verProductoEspecifico/{producto.id}}" role="button">Ver Detalles &raquo;</a></p>
+	       <!--   <p><a class="btn btn-info" th:href="th:href="@{'verProductoEspecifico?id='+${producto.id}}" role="button">Ver Detalles &raquo;</a></p>  -->
+            <p><a class='btn btn-info' th:href="@{'verProductoEspecifico?id='+${producto.id}}">Ver Detalles</a></p>
             <p><a class="btn btn-default btn-sm" th:href="@{/ModificarProducto}" role="button">Modificar &raquo;</a></p>
-						
+			<p><a class='btn btn-default btn-sm' th:href="@{'borrarProducto?id='+${producto.id}}">Borrar</a></p>						
 	        </div>
+	       
 
-      
+     </div> 
 
       </div>
      </div>
-    </div>
+    
 
 
       <!-- Three columns of text below the carousel -->

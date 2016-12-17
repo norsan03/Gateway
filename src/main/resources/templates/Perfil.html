@@ -60,7 +60,7 @@
 		<h2>Tu Perfil de Usuario</h2>
 		<h3>Bienvenido <span th:text="${uLogueado.email}">nombre</span></h3>
 
-    <form th:action="@{/modificarUsuario}" th:object="${usuario}" class="form-signin" method="post" >
+    <form th:action="@{/modificarUsuario/{uLogueado}" th:object="${usuario}" class="form-signin" method="post" >
 		<fieldset>
 			<legend>Formulario de Edición de Usuarios</legend>
 

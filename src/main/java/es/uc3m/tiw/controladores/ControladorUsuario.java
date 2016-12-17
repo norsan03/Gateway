@@ -74,9 +74,9 @@ public class ControladorUsuario {
 			Usuario uLogueado = restTemplate.postForObject("http://localhost:8010/modificarUsuario", usuario, Usuario.class);
 			modelo.put("uLogueado",new Usuario());
 			return "Perfil";
-		}*
-		
-		/*@RequestMapping(value = "/modificarUsuario", method = RequestMethod.POST)
+		}
+	
+		@RequestMapping(value = "/modificarUsuario", method = RequestMethod.POST)
 		public String actualizarUsuario(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuarioLogueado, @ModelAttribute Usuario usuarioNuevo){
 			long idLogueado= usuarioLogueado.getId();
 			Map<String, Long> vars = new HashMap<String, Long>();
