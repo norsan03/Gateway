@@ -11,6 +11,14 @@
 		<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
 		<script th:href="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
 		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
+		
+		<script>
+		function logout (){
+			alert("Se ha cerrado su sesion.");
+			
+		}
+		
+		</script>
 
   </head>
 
@@ -35,9 +43,10 @@
               <li class="active"><a th:href="@{/home}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
               <li><a th:href="@{/misProductos}"><span class="glyphicon glyphicon-list-alt"></span> Mis productos</a></li>
               <li><a th:href="@{/Perfil}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+              <li><a th:href="@{/bandejaEntrada}"><span class="glyphicon glyphicon-user"></span> Buzon Mensajes</a></li>
             </ul>
           	<ul class="nav navbar-nav navbar-right">
-              <li><a th:href="@{/cerrarSesion}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              <li><a th:href="@{/cerrarSesion}" onclick="return logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul> 
         </div><!--/.navbar-collapse -->
       </div>
@@ -94,8 +103,11 @@
 	                    <h2 th:text="${producto.titulo}">Titulo</h2>
 	                    <p th:text="${producto.descripcion}">Descripcion</p>
 						
+
 	        <p><a class="btn btn-info" th:href="@{'verProductoEspecifico?id='+${producto.id}}" role="button">Ver Detalles &raquo;</a></p>
      		<p><a class="btn btn-info" th:href="@{/chat}" role="button">¡Lo Quiero! &raquo;</a></p>
+
+
 						
 	        </div>
 
