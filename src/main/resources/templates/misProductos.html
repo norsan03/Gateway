@@ -17,6 +17,11 @@
 			
 		}
 		
+		function borrar (){
+			confirm("¿Esta seguro de que quiere realizar esta accion? Confirme el borrado.");
+			
+		}
+		
 		</script>
   </head>
 
@@ -86,8 +91,8 @@
 						
 	       <!--   <p><a class="btn btn-info" th:href="th:href="@{'verProductoEspecifico?id='+${producto.id}}" role="button">Ver Detalles &raquo;</a></p>  -->
             <p><a class='btn btn-info' th:href="@{'verProductoEspecifico?id='+${producto.id}}">Ver Detalles</a></p>
-            <p><a class="btn btn-default btn-sm" th:href="@{/ModificarProducto}" role="button">Modificar &raquo;</a></p>
-			<p><a class='btn btn-default btn-sm' th:href="@{'borrarProducto?id='+${producto.id}}">Borrar</a></p>						
+            <p><a class="btn btn-default btn-sm" th:href="@{'ModificarProducto?id='+${producto.id}}">Modificar &raquo;</a></p>
+			<p><a class='btn btn-default btn-sm' th:href="@{'borrarProducto?id='+${producto.id}}" onclick="return borrar()">Borrar</a></p>						
 	        </div>
 	       
 

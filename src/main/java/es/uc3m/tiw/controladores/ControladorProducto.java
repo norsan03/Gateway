@@ -105,18 +105,20 @@ public class ControladorProducto {
 		return "misProductos";
 	}
 	
-	@RequestMapping(value="/ModificarProducto", method=RequestMethod.GET)
-	public String modificarProductoGET(Model modelo, @ModelAttribute Producto producto){
-
+	@RequestMapping(value="/ModificarProducto/{id}", method=RequestMethod.GET)
+	public String modificarProductoGET(Model modelo,@PathVariable(name="id") int id){
+		System.out.println(id);
+		Producto productoId = restTemplate.getForObject("http://localhost:8020/buscarProducto/{id}", Producto.class, id);
+		System.out.println(id);
+		modelo.addAttribute(productoId);
 		return "ModificarProducto";
 	}
 	
+	
 	@RequestMapping(value="/verProductoEspecifico", method=RequestMethod.GET)
 	public String verProductoEspecifico(Model modelo, @RequestParam(name="id") int id, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
-		
 		Producto productoE = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
 		modelo.addAttribute("producto", productoE);
-
 		return "producto";
 	}
 		
