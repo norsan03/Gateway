@@ -153,10 +153,10 @@
 				type="password" name="password" id="clave" th:value="${uLogueado.password}"/>
 				
 		</fieldset>
-		<input type="submit" onclick="return validate()" value="Modificar"/>
+		<input type="submit" onclick="return validate()" class='btn btn-default btn-sm' value="Modificar"/>
 
 	</form>
-	<td><a href="#" onclick="return borrar()">Borrar</a></td>
+	<p><a class='btn btn-default btn-sm' th:href="@{'borrarUsuario?id='+${uLogueado.id}}">Eliminar cuenta</a></p>
 
                                
          </div>

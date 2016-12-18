@@ -104,4 +104,11 @@ public class ControladorUsuario {
 			return "Perfil";
 		}
 		
+		@RequestMapping(value="/borrarUsuario", method=RequestMethod.GET)
+		public String borrarUsuario(Model modelo,@RequestParam(name="id") int id, @SessionAttribute(value="uLogueado") Usuario usuario ){
+			restTemplate.delete("http://localhost:8010/eliminarUsuario/{id}",id);			
+		   
+			return "redirect:/";
+		}
+		
 	}

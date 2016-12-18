@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
@@ -33,7 +32,7 @@
                <li class="active"><a th:href="@{/home}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
               <li class="active"><a :href="@{/misProductos}"><span class="glyphicon glyphicon-list-alt"></span> Mis productos</a></li>
 			  <li><a th:href="@{/Perfil}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-			  <li><a th:href="@{/bandejaEntrada}"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+			  <li><a th:href="@{/bandejaEntrada}"><span class="glyphicon glyphicon-user"></span> Buzon Mensajes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a th:href="@{/}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -48,23 +47,24 @@
    <br></br>
    <br></br>
    					
-	                  
-	                    <h2 th:text="${IdReceptor}">Titulo</h2>
-   				
-	            
+	      
+	        
 			 	<form  th:action="@{/RegistroMensaje}" th:object="${mensaje}" method="post" class="form-horizontal">
-                 
+			 	
                  
                    <div class="form-group">
                      <label  class="col-md-3"  for="exampleInputFile"><h5 class="text-center"><strong>Descripcion Mensaje</strong></h5></label> 
                     <div class="col-md-7">
                     <textarea th:field="*{mensaje}" id="mensaje" type="text" class="form-control" rows ="15" data-validation="required" data-validation-length="max255" data-validation-error-msg="Introduzca un mensaje" placeholder="Mensaje" name="mensaje"> </textarea>
-                    <input type="hidden" th:field="${IdReceptor}" />
+                    <input type="hidden" th:field="*{IdReceptor}" />
+                    
+                  
+                    
                     </div>
                   </div>
                   <br/>
                       <div id="sendMsgButon">
-                        <button type="submit" class="btn btn-default btn-xs" name="Enviar">Enviar!</button>
+                        <button type="submit" class="btn btn-default btn-xl" name="Enviar">Enviar!</button>
                       </div>
                 </form>
               

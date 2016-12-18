@@ -54,42 +54,32 @@
    
 		<h2>Lista de Mensajes</h2>
 	
-
+		<div class="row">
+			<div id="entrada" class="col-md-3">
+				<table class = "table table-hover">
+					<thead>
+						<tr>
+							<th>Remitente</th>	
+							<th>ID Mensaje</th>
+							<th>Mensaje</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="mensaje: ${bandejaEntrada}" onclick="'location'index.html'">
+							<td th:text="${mensaje.IdEmisor}"></td>
+							<td th:text="${mensaje.Id}"></td>
+							<td th:text="${mensaje.mensaje}"></td>
+							<td><a class="btn btn-info" th:href="@{'chatt?IdReceptor='+${mensaje.IdEmisor}" role="button">Responder &raquo;</a></td>
+							
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
                                 
-	
-		<fieldset>
-			
-
-			<table class="table table-striped">
-
-			<tr>
-			
-             <div th:each="mensaje : ${misMensajes}" id="email" class="col-md-3">
-	                  
-	                    <h2 th:text="${mensaje.IdEmisor}">emisor</h2>
-	                    <p th:text="${mensaje.mensaje}">Mensaje</p>
-	                    
-				<th>De</th>
-				<th>Producto</th>
-				<th>Mensaje</th>
-				
-				</div>
-			</tr>
-			
-			<tr th:each="mensaje : ${mensajes}" >
-				<td th:text="${mensaje.IdEmisor}" ></td>
-				<td th:text="${mensaje.IdProducto}" ></td>
-				<td th:text="${mensaje.mensaje}"></td>
-			</tr>
-
-	</table>
-		</fieldset>
-		
-
-	
-	
-
-                               
+                   
     </div>
    	
 

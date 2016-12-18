@@ -105,9 +105,10 @@
 						
 
 	        <p><a class="btn btn-info" th:href="@{'verProductoEspecifico?id='+${producto.id}}" role="button">Ver Detalles &raquo;</a></p>
-     		<p><a class="btn btn-info" th:href="@{'chatt?idReceptor='+${producto.id}}" role="button">¡Lo Quiero! &raquo;</a></p>
-
-
+     		<!--  <p><a class="btn btn-info" th:href="@{chatt/{IdReceptor}/{IdProducto}/details(IdReceptor=${producto.usuario}&IdProducto=${producto.id})}" role="button">¡Lo Quiero! &raquo;</a></p> -->
+				<p><a class="btn btn-info" th:href="@{'chatt?IdReceptor='+${producto.usuario}}" role="button">¡Lo Quiero! &raquo;</a></p>
+				
+				  
 						
 	        </div>
 

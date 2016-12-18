@@ -1,6 +1,10 @@
 package es.uc3m.tiw.controladores;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,45 +34,53 @@ public class ControladorChat {
 	RestTemplate restTemplate;
 	
 	@RequestMapping(value = "/chatt", method = RequestMethod.GET)
-	public String chat (Model modelo, @RequestParam(name="IdReceptor") int IdReceptor, @ModelAttribute Mensaje mensaje,@SessionAttribute(value="uLogueado") Usuario usuario){
+	public String chat (Model modelo, @RequestParam(name="IdReceptor") int IdReceptor, /*@RequestParam(name="IdProducto") int IdProducto,*/ @ModelAttribute Mensaje mensaje,@SessionAttribute(value="uLogueado") Usuario usuario){
 		modelo.addAttribute("IdReceptor", IdReceptor);
-		
+		//modelo.addAttribute("IdProducto", IdProducto);
 		
 		return "chat";
 		
 	}
+	
+	
 		
 	@RequestMapping(value = "/RegistroMensaje", method = RequestMethod.POST)
-	public String enviarMensaje(Model modelo, @RequestParam int IdReceptor, @ModelAttribute Mensaje mensaje,@SessionAttribute(value="uLogueado") Usuario usuario){
+	public String enviarMensaje(Model modelo, @RequestParam int IdReceptor, @ModelAttribute Mensaje mensaje, @SessionAttribute(value="uLogueado") Usuario usuario){
 		
-		String idEmisor = Long.toString(usuario.getId());
+		String idEmisor = usuario.getEmail();
 		String idReceptor = Integer.toString(IdReceptor);
 		
-		Map<String, String> ids = new HashMap<>();
-		ids.put("idPropietario",idEmisor);
-		ids.put("idReceptor", idReceptor);
-				
-		restTemplate.postForObject("http://localhost:8030/guardarMensaje{ids}", mensaje, Mensaje.class,ids);
+		restTemplate.postForObject("http://localhost:8030/guardarMensaje/{idEmisor}/{idReceptor}", mensaje, Mensaje.class, idEmisor,idReceptor);
 		
 		return "home";
 	}
-	/*
+	
 	@RequestMapping(value = "/bandejaEntrada", method = RequestMethod.GET)
 	public String bandejaEntrada(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuario){
-		String emailReceptor = usuario.getEmail();
-		ResponseEntity<Mensaje[]> response = restTemplate.getForEntity("http://localhost:8030/listarMensajes/{email}",Mensaje[].class, emailReceptor);
-		Mensaje[] mensajesRecibidos = response.getBody();
-		modelo.addAttribute("mensajes", mensajesRecibidos);
-	    return "bandejaEntrada";
-	}
-	*/
-	@RequestMapping(value = "/enviarMensaje")
-	public String chat(Model modelo, @ModelAttribute Mensaje mensaje){
-		return "enviarMensaje";
+		
+		int id = (int)usuario.getId();
+		ResponseEntity<Mensaje[]> response = restTemplate.getForEntity("http://localhost:8030/bandejaEntrada/{id}",Mensaje[].class, id);
+		Mensaje[] mensajesTodos = (Mensaje[])response.getBody();
+	
+		//List <Mensaje> mensajes = Arrays.asList(mensajesTodos);
+		List <Mensaje> mensajesUsuario = new ArrayList<Mensaje>();
+		
+		String idsesion = Integer.toString(id);
+		
+		for(int i=0;i<mensajesTodos.length;i++){
+
+			if (idsesion.equals(mensajesTodos[i].getIdReceptor())){
+			//	mensajesUsuario.get(i).setIdReceptor();
+				
+				mensajesUsuario.add(mensajesTodos[i]);
+			}
+				
+		}
+		
+		modelo.addAttribute("bandejaEntrada", mensajesUsuario);
+		return "bandejaEntrada";
+	
 	}
 	
-	@RequestMapping(value = "/bandejaEntrada")
-	public String chat2(Model modelo){
-		return "bandejaEntrada";
-	}
+	
 }
