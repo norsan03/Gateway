@@ -157,15 +157,12 @@ function validate() {
 			<label for="precio">Precio:</label>
 			<input th:field="*{precio}" type="number" name="precio" id="precio" /><br/>
 			
-			<input  name="id" id="id" value="${usuario.id }" type="hidden" /> 
-			<input type="hidden" value="EDITAR" name="accion" />
+			
 		</fieldset>
 		<input type="submit" onclick="return validate()" value="Modificar" />
 
 	</form>
-		<div>
-		<a th:href="@{/borrarProducto}" onclick="return borrar()">Borrar</a>
-		</div>
+		
 
                                
     </div>

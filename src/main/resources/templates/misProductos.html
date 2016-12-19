@@ -86,7 +86,7 @@
 						
 	       <!--   <p><a class="btn btn-info" th:href="th:href="@{'verProductoEspecifico?id='+${producto.id}}" role="button">Ver Detalles &raquo;</a></p>  -->
             <p><a class='btn btn-info' th:href="@{'verProductoEspecifico?id='+${producto.id}}">Ver Detalles</a></p>
-            <p><a class="btn btn-default btn-sm" th:href="@{/ModificarProducto}" role="button">Modificar &raquo;</a></p>
+            <p><a class="btn btn-default btn-sm" th:href="@{'verParaModificar?id='+${producto.id}}" role="button">Modificar &raquo;</a></p>
 			<p><a class='btn btn-default btn-sm' th:href="@{'borrarProducto?id='+${producto.id}}">Borrar</a></p>						
 	        </div>
 	       
