@@ -45,11 +45,8 @@ public class ControladorUsuario {
 			
 			Usuario uLogueado = restTemplate.postForObject("http://localhost:8010/validar", usuario, Usuario.class);
 			modelo.addAttribute("uLogueado",uLogueado);
-			
-			
+	
 			//Código para sacar el catalogo de producto al iniciar sesion a lo bruto
-			
-			
 			
 			ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
 
@@ -59,8 +56,6 @@ public class ControladorUsuario {
 			/*ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
 			Producto[] catalogo = response.getBody();
 			modelo.addAttribute("catalogo", catalogo);*/
-
-			
 			return "home";
 		}
 		
@@ -69,21 +64,33 @@ public class ControladorUsuario {
 			return "registroUsuario";
 		}
 		
-		/*@RequestMapping(value = "/modificarUsuario", method = RequestMethod.POST)
-		public String modificarUsuario (Model modelo, @SessionAttribute(value="uLogueado") Usuario usuario){
-			Usuario uLogueado = restTemplate.postForObject("http://localhost:8010/modificarUsuario", usuario, Usuario.class);
-			modelo.put("uLogueado",new Usuario());
-			return "Perfil";
+		@RequestMapping(value="/VerUsuarioParaModificar", method=RequestMethod.GET)
+		public String VerUsuarioParaModificar(Model modelo,@SessionAttribute(value="uLogueado") Usuario usuario){
+			
+			
+			int id = (int) usuario.getId();
+			
+			Usuario usuarioE = restTemplate.postForObject("http://localhost:8010/verPerfilUsuario", usuario, Usuario.class);
+			usuarioE.setId(id);
+			System.out.println(usuarioE.getId());
+			modelo.addAttribute("uLogueado", usuarioE);
+			restTemplate.postForObject("http://localhost:8010/eliminarUsuario/{id}", usuario, Usuario.class, id);			
+			
+
+			return "ModificarPerfil";
 		}
-	
-		@RequestMapping(value = "/modificarUsuario", method = RequestMethod.POST)
-		public String actualizarUsuario(Model modelo, @SessionAttribute(value="uLogueado") Usuario usuarioLogueado, @ModelAttribute Usuario usuarioNuevo){
-			long idLogueado= usuarioLogueado.getId();
-			Map<String, Long> vars = new HashMap<String, Long>();
-			vars.put("idLogueado", idLogueado);
-			Usuario uLogueado = restTemplate.postForObject("http://localhost:8010/editarU/{id}", usuarioLogueado, Usuario.class,vars);
-			modelo.addAttribute("uLogueado",uLogueado);
-			return "Perfil";*/
+		
+		
+		@RequestMapping(value="/ModificarUsuario", method=RequestMethod.POST)
+		public String modificarPerfil(Model modelo,@ModelAttribute Usuario usuario){
+			
+			
+			int id = (int) usuario.getId();
+			usuario.setId(id);
+			Usuario usuarioE = restTemplate.postForObject("http://localhost:8010/ModificarUsuario", usuario, Usuario.class);
+			modelo.addAttribute("uLogueado", usuarioE);
+			return "ModificarPerfil";
+		}
 	
 		
 		@RequestMapping(value = "/registroUsuario", method = RequestMethod.POST)
@@ -107,7 +114,6 @@ public class ControladorUsuario {
 		@RequestMapping(value="/borrarUsuario", method=RequestMethod.GET)
 		public String borrarUsuario(Model modelo,@RequestParam(name="id") int id, @SessionAttribute(value="uLogueado") Usuario usuario ){
 			restTemplate.delete("http://localhost:8010/eliminarUsuario/{id}",id);			
-		   
 			return "redirect:/";
 		}
 		

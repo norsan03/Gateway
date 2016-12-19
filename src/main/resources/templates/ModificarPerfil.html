@@ -137,46 +137,29 @@
 		<h2>Tu Perfil de Usuario</h2>
 		<h3>Bienvenido <span th:text="${uLogueado.email}">nombre</span></h3>
 
-        <div id="perfil">
-        	
-        	<div>
-        		<label class="col-md-12">Nombre</label>
-        		<span class="col-md-12" th:text="${uLogueado.nombre}"></span>
-        	</div>
-        	
-        	<div>
-        		<label class="col-md-12">Apellidos</label>
-        		<span class="col-md-12" th:text="${uLogueado.apellidos}"></span>
-        	</div>
-        	
-        	<div>
-        		<label class="col-md-12">Email</label>
-        		<span class="col-md-12" th:text="${uLogueado.email}"></span>
-        	</div>
-        	        	
-        	<div>
-        		<label class="col-md-12">Ciudad</label>
-        		<span class="col-md-12" th:text="${uLogueado.ciudad}"></span>
-        	</div>
-        	
-        	<div>
-        		<label class="col-md-12">Password</label>
-        		<span class="col-md-12" th:text="${uLogueado.password}"></span>
-        	</div>
-        	
-        	<div class="row">
+    <form th:action="@{/ModificarUsuario}" th:object="${usuario}" class="form-signin" method="post" name="Form">
+		<fieldset>
+			<legend>Formulario de Edición de Usuarios</legend>
 
+			<label for="nom">Nombre:</label> <input type="text" name="nombre"
+				id="nom" th:value="${uLogueado.nombre}"/><br></br> 
+			<label for="apellidos">Apellidos:</label> <input type="text" name="apellidos"
+				id="apellidos" th:value="${uLogueado.apellidos}"  /><br></br> 
+            <label for="email">Email:</label> <input type="text" name="email"
+				id="email" th:value="${uLogueado.email}"  /><br></br> 
+			 <label for="ciudad">Ciudad:</label> <input type="text" name="ciudad"
+				id="ciudad" th:value="${uLogueado.ciudad}"  /><br></br> 
+			<label for="clave">Password:</label> <input
+				type="password" name="password" id="clave" th:value="${uLogueado.password}"/>
+				
+		</fieldset>
+		<input type="submit" onclick="return validate()" class='btn btn-default btn-sm' value="Modificar"/>
 
-        	</div>
-        	
-        </div>
-        </div>
-	<p><a class='btn btn-default btn-sm' th:href="@{/VerUsuarioParaModificar}">Modificar cuenta</a></p>
+	</form>
 
-
-	<p><a class='btn btn-default btn-sm' th:href="@{'borrarUsuario?id='+${uLogueado.id}}" onclick="return borrar()">Eliminar cuenta</a></p>
-
-       
+                               
+         </div>
+     
 <footer style="background-color: #555;
       color: white;
       padding: 15px;">

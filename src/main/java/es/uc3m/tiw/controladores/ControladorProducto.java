@@ -43,12 +43,9 @@ public class ControladorProducto {
 		int id = (int)usuario.getId();
 		//Map<String, String> parametros = new HashMap<>();
 		//parametros.put("id",new Integer(id).toString());
-		
 		ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerMisProductos/{id}",Producto[].class, id);
-
 		Producto[] misProductos = response.getBody();
 		modelo.addAttribute("misProductos", misProductos);
-		
 		return "misProductos";
 	}
 	
@@ -111,7 +108,6 @@ public class ControladorProducto {
 		Producto productoE = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
 		modelo.addAttribute("producto", productoE);
 		int idProductoAct = productoE.getId();
-		modelo.addAttribute("producto", productoE);
 		restTemplate.postForObject("http://localhost:8020/eliminarProducto/{idProductoAc}", productoE, Producto.class, idProductoAct);
 
 

@@ -10,6 +10,13 @@
 		<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
 		<script th:href="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
 		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
+		
+		<script>
+		function logout (){
+			alert("Se ha cerrado su sesion.");
+			
+		}
+		</script>
 
   </head>
 
@@ -40,7 +47,7 @@
               <li><a th:href="@{/bandejaEntrada}"><span class="glyphicon glyphicon-user"></span> Buzon Mensajes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a th:href="@{/}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+             <li><a th:href="@{/cerrarSesion}" onclick="return logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul> 
         </div><!--/.navbar-collapse -->
       </div>
