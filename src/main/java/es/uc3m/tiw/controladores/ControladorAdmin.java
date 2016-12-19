@@ -214,5 +214,24 @@ public class ControladorAdmin {
 	}
 	
 	
+	@RequestMapping(value="/verParaModificarA", method=RequestMethod.GET)
+	public String verParaModificar(Model modelo, @RequestParam(name="id") int id, @ModelAttribute Producto producto,@SessionAttribute(value="aLogueado") Admin admin){
+		
+		Producto productoE = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
+		modelo.addAttribute("producto", productoE);
+		int idProductoAct = productoE.getId();
+		restTemplate.postForObject("http://localhost:8020/eliminarProducto/{idProductoAc}", productoE, Producto.class, idProductoAct);
+		return "ADMproductoEDIT";
+	}
+	
+	@RequestMapping(value="/ModificarProductoA", method=RequestMethod.POST)
+	public String modificarProducto(Model modelo, @ModelAttribute Producto producto, @SessionAttribute(value="aLogueado") Admin admin){
+		
+		int id = (int) admin.getId();
+		producto.setUsuario(id);
+		Producto productoE = restTemplate.postForObject("http://localhost:8020/ModificarProducto", producto, Producto.class);
+		modelo.addAttribute("producto", productoE);
+		return "ADMproductoEDIT";
+	}
 	
 }
