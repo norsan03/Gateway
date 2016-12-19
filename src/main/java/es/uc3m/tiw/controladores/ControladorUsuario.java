@@ -90,6 +90,9 @@ public class ControladorUsuario {
 		public String guardarUsuario(Model modelo, @ModelAttribute Usuario usuario){
 			Usuario uLogueado = restTemplate.postForObject("http://localhost:8010/registroUsuario", usuario, Usuario.class);
 			modelo.addAttribute("uLogueado", uLogueado);
+			ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
+			Producto[] productos = response.getBody();
+			modelo.addAttribute("productos", productos);
 			return "home";
 		}
 		
@@ -98,6 +101,8 @@ public class ControladorUsuario {
 		    status.setComplete();
 		    return "/index";
 		}
+		
+		
 		
 		@RequestMapping(value="/Perfil")
 		public String verUsuario(){

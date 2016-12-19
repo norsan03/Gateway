@@ -11,6 +11,13 @@
 		<script th:href="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
 		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
 
+				<script>
+		function logout (){
+			alert("Se ha cerrado su sesion.");
+			
+		}
+		
+		</script>
   </head>
 
   <body>
@@ -26,15 +33,16 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#" style="padding: 7px;"><img th:src="@{https://lh3.googleusercontent.com/eiHGogXLz3iBRZhKrdr7FOkw6q5P_iuGSwqGWmd1yRzMcc-B7V6xIKR9wzuqDrD61K4=w300}" alt="Wallapop" height="38" width="38" /></a> 
-        <a class="navbar-brand" th:href="@{ADMproductos}">WallapopAdmin TIW</a>
+        <a class="navbar-brand" th:href="@{/ADMproductos}">WallapopAdmin TIW</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-              <li class="active"><a th:href="@{ADMproductos}"><span class="glyphicon glyphicon-list-alt"></span> Gestion Productos</a></li>
-              <li ><a th:href="@{ADMusuarios}"><span class="glyphicon glyphicon-user"></span> Gestion Usuarios</a></li>
+              <li class="active"><a th:href="@{/ADMproductos}"><span class="glyphicon glyphicon-list-alt"></span> Gestion Productos</a></li>
+              <li ><a th:href="@{/ADMusuarios}"><span class="glyphicon glyphicon-user"></span> Gestion Usuarios</a></li>
+              <li><a th:href="@{/bandejaEntradaA}"><span class="glyphicon glyphicon-user"></span> Buzon Mensajes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              <li><a th:href="@{/cerrarSesionA}" onclick="return logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul> 
         </div><!--/.navbar-collapse -->
       </div>

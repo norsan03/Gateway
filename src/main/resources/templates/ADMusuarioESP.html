@@ -12,6 +12,14 @@
 		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
 
   </head>
+  
+    		<script>
+		function logout (){
+			alert("Se ha cerrado su sesion.");
+			
+		}
+		
+		</script>
 
   <body>
 
@@ -26,15 +34,16 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#" style="padding: 7px;"><img th:src="@{https://lh3.googleusercontent.com/eiHGogXLz3iBRZhKrdr7FOkw6q5P_iuGSwqGWmd1yRzMcc-B7V6xIKR9wzuqDrD61K4=w300}" alt="Wallapop" height="38" width="38" /></a> 
-        <a class="navbar-brand" th:href="@{ADMproductos}">WallapopAdmin TIW</a>
+        <a class="navbar-brand" th:href="@{/ADMproductos}">WallapopAdmin TIW</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-              <li><a th:href="@{ADMproductos}"><span class="glyphicon glyphicon-list-alt"></span> Gestion Productos</a></li>
-              <li class="active" ><a th:href="@{ADMusuarios}"><span class="glyphicon glyphicon-user"></span> Gestion Usuarios</a></li>
+              <li><a th:href="@{/ADMproductos}"><span class="glyphicon glyphicon-list-alt"></span> Gestion Productos</a></li>
+              <li class="active" ><a th:href="@{/ADMusuarios}"><span class="glyphicon glyphicon-user"></span> Gestion Usuarios</a></li>
+              <li><a th:href="@{/bandejaEntradaA}"><span class="glyphicon glyphicon-user"></span> Buzon Mensajes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              <li><a th:href="@{/cerrarSesionA}" onclick="return logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul> 
         </div><!--/.navbar-collapse -->
       </div>
@@ -50,29 +59,33 @@
     </nav>
 
 
-    <div class="container text-center" style="padding: 15px">
-      
-      <div class="row">  
-
-        <div class="col-md-12">
-
-         <div class="container well">
-
-          <h2 style="color: #23C5B2" th:text="@{usuario.email}">Perfil</h2>
-                        
-
-
-                <h3 th:text="@{usuario.nombre}"> Nombre</h3>
-                <h3 th:text="@{usuario.apellidos}"> Apellidos</h3>
-                <h3 th:text="@{usuario.nombre}"> Ciudad</h3>
-
-                <a class="btn btn-success " th:href="@{/ADMmodificarUsuario/{usuario.id}}"  role="button">Editar</a>
-                <a class="btn btn-danger" role="button" th:href="@{/ADMmodificarUsuario/{usuario.id}}" >Dar de baja</a>
-
-      </div>      
-
-      </div>
-    </div>
+<div class="container text-center" style="padding: 15px">
+   
+        
+         <div class="container">
+        <div id="titulo">
+            <h2><strong><span th:text="'Usuario:' + ${usuario.email}"></span></strong></h2>
+        </div>
+        <div id="perfil">
+        	
+        	<div>
+        		<label class="col-md-12">Nombre</label>
+        		<span class="col-md-12" th:text="${usuario.nombre}"></span>
+        	</div>
+        	
+        	<div>
+        		<label class="col-md-12">Apellidos</label>
+        		<span class="col-md-12" th:text="${usuario.apellidos}"></span>
+        	</div>
+        	
+        	<div>
+        		<label class="col-md-12">Ciudad</label>
+        		<span class="col-md-12" th:text="${usuario.ciudad}"></span>
+        	</div>        	      
+        	
+        </div>
+        </div>
+        </div>
     
 
 

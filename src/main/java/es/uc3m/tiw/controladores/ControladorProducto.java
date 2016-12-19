@@ -43,12 +43,9 @@ public class ControladorProducto {
 		int id = (int)usuario.getId();
 		//Map<String, String> parametros = new HashMap<>();
 		//parametros.put("id",new Integer(id).toString());
-		
 		ResponseEntity<Producto[]> response = restTemplate.getForEntity("http://localhost:8020/obtenerMisProductos/{id}",Producto[].class, id);
-
 		Producto[] misProductos = response.getBody();
 		modelo.addAttribute("misProductos", misProductos);
-		
 		return "misProductos";
 	}
 	
@@ -105,29 +102,38 @@ public class ControladorProducto {
 		return "misProductos";
 	}
 	
-	@RequestMapping(value="/ModificarProducto/{id}", method=RequestMethod.GET)
-	public String modificarProductoGET(Model modelo,@PathVariable(name="id") int id){
-		System.out.println(id);
-		Producto productoId = restTemplate.getForObject("http://localhost:8020/buscarProducto/{id}", Producto.class, id);
-		System.out.println(id);
-		modelo.addAttribute(productoId);
+	@RequestMapping(value="/verParaModificar", method=RequestMethod.GET)
+	public String verParaModificar(Model modelo, @RequestParam(name="id") int id, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
+		
+		Producto productoE = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
+		modelo.addAttribute("producto", productoE);
+		int idProductoAct = productoE.getId();
+		restTemplate.postForObject("http://localhost:8020/eliminarProducto/{idProductoAc}", productoE, Producto.class, idProductoAct);
+
+
 		return "ModificarProducto";
 	}
+		
 	
+	@RequestMapping(value="/ModificarProducto", method=RequestMethod.POST)
+	public String modificarProducto(Model modelo, @ModelAttribute Producto producto, @SessionAttribute(value="uLogueado") Usuario usuario){
+		
+		int id = (int) usuario.getId();
+		producto.setUsuario(id);
+		Producto productoE = restTemplate.postForObject("http://localhost:8020/ModificarProducto", producto, Producto.class);
+		modelo.addAttribute("producto", productoE);
+		return "ModificarProducto";
+	}
 	
 	@RequestMapping(value="/verProductoEspecifico", method=RequestMethod.GET)
 	public String verProductoEspecifico(Model modelo, @RequestParam(name="id") int id, @ModelAttribute Producto producto,@SessionAttribute(value="uLogueado") Usuario usuario){
+		
 		Producto productoE = restTemplate.postForObject("http://localhost:8020/obtenerProducto/{id}", producto, Producto.class, id);
 		modelo.addAttribute("producto", productoE);
+
 		return "producto";
 	}
-		
-	@RequestMapping(value="/ModificarProducto", method=RequestMethod.POST)
-	public String modificarProductoPOST(Model modelo, @ModelAttribute Producto producto){
-		/*Producto pregistrado = restTemplate.postForObject("http://localhost:8020/altaProducto", producto, Producto.class);
-		modelo.addAttribute(pregistrado);*/
-		return "ModificarProducto";
-	}
+	
 	
 	@RequestMapping(value = "/busquedaSimple", method = RequestMethod.POST)
 	public String catalogoGet(Model modelo, @RequestParam(name="busquedaIntroducida") String texto){

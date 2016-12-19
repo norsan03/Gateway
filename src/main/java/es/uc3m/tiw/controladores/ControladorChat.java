@@ -52,6 +52,10 @@ public class ControladorChat {
 		
 		restTemplate.postForObject("http://localhost:8030/guardarMensaje/{idEmisor}/{idReceptor}", mensaje, Mensaje.class, idEmisor,idReceptor);
 		
+		ResponseEntity<Producto[]> response1 = restTemplate.getForEntity("http://localhost:8020/obtenerCatalogo",Producto[].class);
+		Producto[] productos = response1.getBody();
+		modelo.addAttribute("productos", productos);
+		
 		return "home";
 	}
 	

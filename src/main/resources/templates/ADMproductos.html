@@ -10,6 +10,15 @@
 		<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
 		<script th:href="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
 		<script th:href="@{/js/bootstrap.min.css}" src="../../js/bootstrap.min.js"></script>
+		
+		<script>
+		function logout (){
+			alert("Se ha cerrado su sesion.");
+			
+		}
+		
+		</script>
+		
 
   </head>
 
@@ -29,48 +38,83 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#" style="padding: 7px;"><img th:src="@{https://lh3.googleusercontent.com/eiHGogXLz3iBRZhKrdr7FOkw6q5P_iuGSwqGWmd1yRzMcc-B7V6xIKR9wzuqDrD61K4=w300}" alt="Wallapop" height="38" width="38" /></a> 
-        <a class="navbar-brand" th:href="@{ADMproductos}">WallapopAdmin TIW</a>
+        <a class="navbar-brand" th:href="@{/ADMproductos}">WallapopAdmin TIW</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-              <li class="active"><a th:href="@{ADMproductos}"><span class="glyphicon glyphicon-list-alt"></span> Gestion Productos</a></li>
-              <li ><a th:href="@{ADMusuarios}"><span class="glyphicon glyphicon-user"></span> Gestion Usuarios</a></li>
+              <li class="active"><a th:href="@{/ADMproductos}"><span class="glyphicon glyphicon-list-alt"></span> Gestion Productos</a></li>
+              <li ><a th:href="@{/ADMusuarios}"><span class="glyphicon glyphicon-user"></span> Gestion Usuarios</a></li>
+              <li><a th:href="@{/bandejaEntradaA}"><span class="glyphicon glyphicon-user"></span> Buzon Mensajes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              <li><a th:href="@{/cerrarSesionA}" onclick="return logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul> 
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
-
-
-    <nav class="navbar">
+    
+        <nav class="navbar">
 
       <ol class="breadcrumb" style="background-color: #23C5B2; color: white">
-        <li><a th:href="@{ADMproductoESP}" style="color: white"><b>Gestion Productos</b></a></li>
+        <li><a th:href="@{/ADMproductos}" style="color: black"><b>Home</b></a></li>
       </ol>
 
     </nav>
-
-
-    <div class="container text-center" style="padding: 15px">
+    
+<div class="container text-center" style="padding: 15px">
       <div class="row">
 
-	<h1>Bienvenido <span th:text="${aLogueado.email}">nombre</span></h1>
+        <div class="col-md-3 well">
+        
+          <div class="well"  style="background-color: white">
+          <h4>Búsqueda Simple</h4>
+            <form th:action="@{/busquedaSimpleA}" th:object="${producto}" class="form-signin" method="post" >
 
-        <div class="col-md-12 well" style="background-color: white">
+              <input type="text" class="form-control" placeholder="Buscar.." name="busquedaIntroducida"/>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+            </form>
+          </div>
+          <div class="well"  style="background-color: white">
+          <h4>B&uacute;squeda Avanzada</h4>
+            <div class="form-group input-group">
+              <input type="text" class="form-control" placeholder="Buscar.."/>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
 
-        	<div th:each="producto : ${catalogo}" id="productos" class="col-md-3">
+
+        <div class="col-md-9 well" style="background-color: white">
+        <h1>Bienvenido <span th:text="${aLogueado.email}">nombre</span></h1>
+        
+
+		
+        	<div th:each="producto : ${productos}" id="productos" class="col-md-3">
 	                  
 	                    <h2 th:text="${producto.titulo}">Titulo</h2>
 	                    <p th:text="${producto.descripcion}">Descripcion</p>
 						
-	        <p><a class="btn btn-info" th:href="@{/ADMverProductoEspecifico/{producto.id}}" role="button">Ver Detalles &raquo;</a></p>
-     
+
+	        <p><a class="btn btn-info" th:href="@{'verProductoEspecificoA?id='+${producto.id}}" role="button">Ver Detalles &raquo;</a></p>
+     		<!--  <p><a class="btn btn-info" th:href="@{chatt/{IdReceptor}/{IdProducto}/details(IdReceptor=${producto.usuario}&IdProducto=${producto.id})}" role="button">¡Lo Quiero! &raquo;</a></p> -->
+				<p><a class="btn btn-info" th:href="@{'chattA?IdReceptor='+${producto.usuario}}" role="button">Chat &raquo;</a></p>
+				<p><a class='btn btn-default btn-sm btn-danger' th:href="@{'borrarProductoA?id='+${producto.id}}" onclick="return borrar()">Borrar</a></p>
+				
+				  
 						
 	        </div>
 
-    </div>
+	
+      	</div>
+    
     </div>
     
     </div>

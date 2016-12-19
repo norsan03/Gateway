@@ -4,7 +4,7 @@
 
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <title>WallapopAdmin - Producto Especifico</title>
+    <title>WallapopAdmin - Mensaje</title>
 
         <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
 		<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
@@ -13,7 +13,7 @@
 
   </head>
   
-  		<script>
+    		<script>
 		function logout (){
 			alert("Se ha cerrado su sesion.");
 			
@@ -22,6 +22,7 @@
 		</script>
 
   <body>
+
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -37,9 +38,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-              <li class="active"><a th:href="@{/ADMproductos}"><span class="glyphicon glyphicon-list-alt"></span> Gestion Productos</a></li>
+              <li><a th:href="@{/ADMproductos}"><span class="glyphicon glyphicon-list-alt"></span> Gestion Productos</a></li>
               <li ><a th:href="@{/ADMusuarios}"><span class="glyphicon glyphicon-user"></span> Gestion Usuarios</a></li>
-              <li><a th:href="@{/bandejaEntradaA}"><span class="glyphicon glyphicon-user"></span> Buzon Mensajes</a></li>
+              <li class="active" ><a th:href="@{/bandejaEntradaA}"><span class="glyphicon glyphicon-user"></span> Buzon Mensajes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a th:href="@{/cerrarSesionA}" onclick="return logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -51,65 +52,43 @@
     <nav class="navbar">
 
       <ol class="breadcrumb" style="background-color: #23C5B2; color: white">
-        <li><a th:href="@{/home}" style="color: black"><b>Home</b></a></li>
-        <li style="color: white" ><b><i>Producto espec&iacute;fico</i></b></li>
+        <li><a href="@{ADMusuarios}" style="color: black;"><b>Buzon Mensajes</b></a></li>
+        <li style="color: black"><b>Usuario Especifico</b></li>
       </ol>
 
     </nav>
-
-
-<div class="container text-center" style="padding: 15px">
-   
-        
-         <div class="container">
-        <div id="titulo">
-            <h2><strong><span th:text="'Producto:' + ${producto.titulo}"></span></strong></h2>
-        </div>
-        <div id="perfil">
-        	
-        	<div>
-        		<label class="col-md-12">Nombre</label>
-        		<span class="col-md-12" th:text="${producto.titulo}"></span>
-        	</div>
-        	
-        	<div>
-        		<label class="col-md-12">Descripcion</label>
-        		<span class="col-md-12" th:text="${producto.descripcion}"></span>
-        	</div>
-        	
-        	<div>
-        		<label class="col-md-12">Categoria</label>
-        		<span class="col-md-12" th:text="${producto.categoria}"></span>
-        	</div>
-        	        	
-        	<div>
-        		<label class="col-md-12">Ciudad</label>
-        		<span class="col-md-12" th:text="${producto.ciudad}"></span>
-        	</div>
-        	
-        	<div>
-        		<label class="col-md-12">Estado</label>
-        		<span class="col-md-12" th:text="${producto.estado}"></span>
-        	</div>
-        	
-        	<p><a class="btn btn-info" th:href="#" role="button">Modificar &raquo;</a></p>
-        	
-        	<div class="row">
-
-
-        	</div>
-        	
-        </div>
-        </div>
-        </div>
-    
+   					
+	      
+	        
+			 	<form  th:action="@{/RegistroMensajeA}" th:object="${mensaje}" method="post" class="form-horizontal">
+			 	
+                 
+                   <div class="form-group">
+                     <label  class="col-md-3"  for="exampleInputFile"><h5 class="text-center"><strong>Descripcion Mensaje</strong></h5></label> 
+                    <div class="col-md-7">
+                    <textarea th:field="*{mensaje}" id="mensaje" type="text" class="form-control" rows ="15" data-validation="required" data-validation-length="max255" data-validation-error-msg="Introduzca un mensaje" placeholder="Mensaje" name="mensaje"> </textarea>
+                    <input type="hidden" th:field="*{IdReceptor}" />
+                    
+                  
+                    
+                    </div>
+                  </div>
+                  <br/>
+                      <div id="sendMsgButon">
+                        <button type="submit" class="btn btn-default btn-xl" name="Enviar">Enviar!</button>
+                      </div>
+                </form>
+              
+  
+			   <br></br>
+   <br></br>
+   <br></br>
 
       <footer style="background-color: #555;
       color: white;
       padding: 15px;">
         <p>&copy; 2016 Company, Inc.</p>
       </footer>
-
 
   </body>
 </html>
